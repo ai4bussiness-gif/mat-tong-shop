@@ -215,7 +215,7 @@ export default function ProductDetailPage() {
 
             {/* Share */}
             <div className="mt-4">
-              <ShareButton />
+              <ShareButton className="w-full" />
             </div>
 
             {/* Description */}

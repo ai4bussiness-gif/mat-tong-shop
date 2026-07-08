@@ -2,17 +2,16 @@
 @plugin "@tailwindcss/typography";
 
 :root {
-  --background: #ffffff;
-  --foreground: #0f172a;
-  --primary: #0f172a;
+  --background: #030712;
+  --foreground: #e2e8f0;
+  --card-bg: #0a0f1e;
+  --card-border: #1e293b;
+  --primary: #030712;
   --accent: #b8860b;
-  --accent-hover: #a07608;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --card-bg: #ffffff;
+  --accent-hover: #d4a017;
+  --muted: #94a3b8;
   --max-width: 1200px;
-  --header-bg: #0f172a;
-  --text-light: #f8fafc;
+  --header-bg: #030712;
 }
 
 @theme inline {

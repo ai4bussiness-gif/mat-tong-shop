@@ -3,7 +3,7 @@
 import { useState, useCallback } from "react"
 import { Share2, Check } from "lucide-react"
 
-export function ShareButton() {
+export function ShareButton({ className = "" }: { className?: string }) {
   const [copied, setCopied] = useState(false)
 
   const handleShare = useCallback(async () => {
@@ -34,7 +34,7 @@ export function ShareButton() {
   return (
     <button
       onClick={handleShare}
-      className="inline-flex items-center gap-2 text-sm text-gray-500 hover:text-[#b8860b] transition-colors font-medium px-4 py-2 border border-gray-800 rounded-lg hover:border-[#b8860b]/30"
+      className={`inline-flex items-center justify-center gap-2 text-sm text-gray-500 hover:text-[#b8860b] transition-colors font-medium px-4 py-2 border border-gray-800 rounded-lg hover:border-[#b8860b]/30 ${className}`}
     >
       {copied ? (
         <>

@@ -4,6 +4,7 @@ import { prisma } from "@/lib/db"
 import { CalendarDays, ChevronRight, Clock } from "lucide-react"
 import { ProductCard } from "@/components/ui/ProductCard"
 import { ShareButton } from "@/components/ui/ShareButton"
+import TestimonialSection from "@/components/sections/TestimonialSection"
 
 export const dynamic = "force-dynamic"
 
@@ -133,6 +134,10 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             </section>
           )}
+
+          {/* ═══ Testimonials ═══ */}
+          <TestimonialSection />
+
         </div>
       </div>
     </div>

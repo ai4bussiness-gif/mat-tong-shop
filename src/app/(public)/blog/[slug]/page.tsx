@@ -134,12 +134,11 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
               </div>
             </section>
           )}
-
-          {/* ═══ Testimonials ═══ */}
-          <TestimonialSection />
-
         </div>
       </div>
+
+      {/* ═══ Testimonials — outside relative container để mobile ko lỗi ═══ */}
+      <TestimonialSection />
     </div>
   )
 }

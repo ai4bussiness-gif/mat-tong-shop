@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Menu, Search, User, ShoppingBag, X, ChevronDown } from "lucide-react"
 import { useCartStore } from "@/lib/store"
 import { categories } from "@/lib/constants"
@@ -13,6 +14,7 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState("")
   const [mounted, setMounted] = useState(false)
   const itemCount = useCartStore((s) => s.getItemCount())
+  const router = useRouter()
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -94,7 +96,7 @@ export function Header() {
               <User className="w-5 h-5" />
             </Link>
             <button
-              onClick={() => document.dispatchEvent(new CustomEvent('open-cart'))}
+              onClick={() => router.push('/gio-hang')}
               className="p-2 text-gray-300 hover:text-white transition-colors relative"
               aria-label="Cart"
             >

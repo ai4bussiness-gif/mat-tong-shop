@@ -5,6 +5,7 @@ import { TopBar } from "@/components/layout/TopBar"
 import { Header } from "@/components/layout/Header"
 import { Footer } from "@/components/layout/Footer"
 import { CartDrawer } from "@/components/layout/CartDrawer"
+import ChatWidget from "@/components/ui/ChatWidget"
 
 const inter = Inter({
   subsets: ["latin", "vietnamese"],
@@ -29,6 +30,7 @@ export default function PublicLayout({
       <main className="flex-1">{children}</main>
       <Footer />
       <CartDrawer />
+      <ChatWidget />
     </>
   )
 }

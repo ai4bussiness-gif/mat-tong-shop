@@ -26,7 +26,7 @@ export function ProductCard({ product }: { product: Product }) {
         )}
         {!product.inStock && (
           <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-            <span className="bg-white text-black text-xs font-semibold px-3 py-1 rounded-full">
+            <span className="bg-gray-800 text-gray-300 text-xs font-semibold px-3 py-1 rounded-full border border-gray-700">
               Hết hàng
             </span>
           </div>

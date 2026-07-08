@@ -1,146 +1,156 @@
-'use client'
+import Link from 'next/link'
+import { prisma } from '@/lib/db'
+import {
+  ShoppingBag,
+  Package,
+  FileText,
+  FolderTree,
+  TrendingUp,
+  DollarSign,
+  ArrowUpRight,
+} from 'lucide-react'
 
-import { useEffect, useState } from "react"
-import { ShoppingBag, Package, FileText, LogOut } from "lucide-react"
-import Link from "next/link"
-import type { Order, Product } from "@/types"
-import { formatPrice } from "@/lib/utils"
-import { orderStatusMap } from "@/lib/constants"
+async function getStats() {
+  const [productCount, orderCount, categoryCount, blogCount, recentOrders] = await Promise.all([
+    prisma.product.count(),
+    prisma.order.count(),
+    prisma.category.count(),
+    prisma.blogPost.count({ where: { published: true } }),
+    prisma.order.findMany({ orderBy: { createdAt: 'desc' }, take: 5 }),
+  ])
 
-export default function AdminPage() {
-  const [tab, setTab] = useState<string>('orders')
-  const [orders, setOrders] = useState<Order[]>([])
-  const [products, setProducts] = useState<Product[]>([])
+  const totalRevenue = await prisma.order.aggregate({
+    _sum: { total: true },
+    where: { status: { not: 'cancelled' } },
+  })
 
-  useEffect(() => {
-    fetch('/api/orders').then(r => r.json()).then(d => setOrders(d.orders || []))
-    fetch('/api/products').then(r => r.json()).then(d => setProducts(d.products || []))
-  }, [])
-
-  const updateStatus = async (id: number, status: string) => {
-    await fetch('/api/orders', {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ id, status }),
-    })
-    setOrders(prev => prev.map(o => o.id === id ? { ...o, status } : o))
+  return {
+    productCount,
+    orderCount,
+    categoryCount,
+    blogCount,
+    totalRevenue: totalRevenue._sum.total || 0,
+    recentOrders,
   }
+}
 
-  const tabs = [
-    { id: 'orders', label: 'Đơn Hàng', icon: ShoppingBag, count: orders.length },
-    { id: 'products', label: 'Sản Phẩm', icon: Package, count: products.length },
-    { id: 'blog', label: 'Bài Viết', icon: FileText },
-  ] as const
+export default async function AdminDashboardPage() {
+  const stats = await getStats()
+
+  const cards = [
+    {
+      label: 'Đơn hàng',
+      value: stats.orderCount,
+      icon: ShoppingBag,
+      color: 'bg-blue-500/10 text-blue-400 border-blue-500/20',
+      href: '/admin/don-hang',
+    },
+    {
+      label: 'Sản phẩm',
+      value: stats.productCount,
+      icon: Package,
+      color: 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20',
+      href: '/admin/san-pham',
+    },
+    {
+      label: 'Danh mục',
+      value: stats.categoryCount,
+      icon: FolderTree,
+      color: 'bg-purple-500/10 text-purple-400 border-purple-500/20',
+      href: '/admin/danh-muc',
+    },
+    {
+      label: 'Bài viết',
+      value: stats.blogCount,
+      icon: FileText,
+      color: 'bg-amber-500/10 text-amber-400 border-amber-500/20',
+      href: '/admin/bai-viet',
+    },
+  ]
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Admin header */}
-      <header className="bg-[#0f172a] text-white">
-        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Link href="/" className="font-bold text-lg">MẬT TÔNG</Link>
-            <span className="text-xs bg-[#b8860b]/20 text-[#b8860b] px-2 py-0.5 rounded">Admin</span>
-          </div>
-          <Link href="/" className="text-gray-400 hover:text-white text-sm flex items-center gap-1">
-            <LogOut className="w-3.5 h-3.5" /> Về trang chủ
+    <div className="space-y-6">
+      <div>
+        <h1 className="text-xl font-bold text-white">Tổng quan</h1>
+        <p className="text-sm text-gray-400 mt-1">Dashboard quản trị Mật Tông Shop</p>
+      </div>
+
+      {/* Stats cards */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+        {cards.map((card) => {
+          const Icon = card.icon
+          return (
+            <Link
+              key={card.href}
+              href={card.href}
+              className={`${card.color} border rounded-xl p-4 hover:opacity-80 transition-opacity`}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <Icon className="w-5 h-5" />
+                <ArrowUpRight className="w-3.5 h-3.5 opacity-50" />
+              </div>
+              <p className="text-2xl font-bold">{card.value}</p>
+              <p className="text-xs mt-1 opacity-80">{card.label}</p>
+            </Link>
+          )
+        })}
+      </div>
+
+      {/* Revenue */}
+      <div className="bg-[#0f172a] border border-gray-800 rounded-xl p-5">
+        <div className="flex items-center gap-2 mb-1">
+          <DollarSign className="w-4 h-4 text-[#b8860b]" />
+          <h2 className="text-sm font-semibold text-white">Doanh thu</h2>
+        </div>
+        <p className="text-2xl font-bold text-[#b8860b]">
+          {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(stats.totalRevenue)}
+        </p>
+        <p className="text-xs text-gray-500 mt-1">Tổng doanh thu (không tính đã hủy)</p>
+      </div>
+
+      {/* Recent orders */}
+      <div className="bg-[#0f172a] border border-gray-800 rounded-xl p-5">
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-sm font-semibold text-white">Đơn hàng gần đây</h2>
+          <Link
+            href="/admin/don-hang"
+            className="text-xs text-[#b8860b] hover:text-[#c9971a] transition-colors"
+          >
+            Xem tất cả →
           </Link>
         </div>
-      </header>
-
-      <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Tab bar */}
-        <div className="flex gap-2 mb-6 border-b border-[#e2e8f0] pb-3">
-          {tabs.map(t => {
-            const Icon = t.icon
-            return (
-              <button
-                key={t.id}
-                onClick={() => setTab(t.id as any)}
-                className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg transition-colors ${
-                  tab === t.id ? 'bg-[#0f172a] text-white' : 'text-gray-600 hover:bg-gray-100'
-                }`}
+        {stats.recentOrders.length === 0 ? (
+          <p className="text-sm text-gray-500 text-center py-8">Chưa có đơn hàng</p>
+        ) : (
+          <div className="space-y-2">
+            {stats.recentOrders.map((order) => (
+              <div
+                key={order.id}
+                className="flex items-center justify-between py-2 border-b border-gray-800 last:border-0"
               >
-                <Icon className="w-4 h-4" />
-                {t.label}
-                {'count' in t && <span className="text-xs opacity-60">({t.count})</span>}
-              </button>
-            )
-          })}
-        </div>
-
-        {/* Orders tab */}
-        {tab === 'orders' && (
-          <div className="space-y-3">
-            {orders.length === 0 ? (
-              <div className="text-center py-20 text-gray-400">Chưa có đơn hàng</div>
-            ) : (
-              orders.map(order => (
-                <div key={order.id} className="bg-white rounded-lg border border-[#e2e8f0] p-5">
-                  <div className="flex items-start justify-between mb-3">
-                    <div>
-                      <p className="font-semibold">#{order.id} — {order.customerName}</p>
-                      <p className="text-sm text-gray-500">{order.customerPhone} | {order.customerEmail}</p>
-                      <p className="text-sm text-gray-400">{order.customerAddress}</p>
-                    </div>
-                    <div className="text-right">
-                      <p className="font-bold text-[#b8860b]">{formatPrice(order.total)}</p>
-                      <span className={`text-xs px-2 py-0.5 rounded-full ${
-                        order.status === 'pending' ? 'bg-yellow-100 text-yellow-700' :
-                        order.status === 'confirmed' ? 'bg-blue-100 text-blue-700' :
-                        order.status === 'shipping' ? 'bg-purple-100 text-purple-700' :
-                        order.status === 'delivered' ? 'bg-green-100 text-green-700' :
-                        'bg-red-100 text-red-700'
-                      }`}>
-                        {orderStatusMap[order.status] || order.status}
-                      </span>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <select
-                      value={order.status}
-                      onChange={(e) => updateStatus(order.id, e.target.value)}
-                      className="text-xs border border-[#e2e8f0] rounded px-2 py-1"
-                    >
-                      {Object.entries(orderStatusMap).map(([k, v]) => (
-                        <option key={k} value={k}>{v}</option>
-                      ))}
-                    </select>
-                    {order.note && <p className="text-xs text-gray-400">Ghi chú: {order.note}</p>}
-                  </div>
-                  <details className="mt-3">
-                    <summary className="text-xs text-gray-400 cursor-pointer hover:text-gray-600">Xem sản phẩm</summary>
-                    <div className="mt-2 space-y-1">
-                      {JSON.parse(order.items).map((item: any, i: number) => (
-                        <p key={i} className="text-xs text-gray-600">{item.name} x{item.quantity} — {formatPrice(item.price * item.quantity)}</p>
-                      ))}
-                    </div>
-                  </details>
+                <div>
+                  <p className="text-sm text-white font-medium">#{order.id} — {order.customerName}</p>
+                  <p className="text-xs text-gray-500">{new Date(order.createdAt).toLocaleDateString('vi-VN')}</p>
                 </div>
-              ))
-            )}
-          </div>
-        )}
-
-        {/* Products tab */}
-        {tab === 'products' && (
-          <div>
-            <p className="text-sm text-gray-500 mb-4">{products.length} sản phẩm</p>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {products.map(p => (
-                <div key={p.id} className="bg-white rounded-lg border border-[#e2e8f0] p-4">
-                  <p className="font-medium text-sm line-clamp-2 mb-1">{p.name}</p>
-                  <p className="text-xs text-gray-400">{p.category?.name} | {p.dimensions || ''}</p>
-                  <p className="text-sm font-bold text-[#b8860b] mt-2">{formatPrice(p.price)}</p>
+                <div className="text-right">
+                  <p className="text-sm font-bold text-[#b8860b]">
+                    {new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(order.total)}
+                  </p>
+                  <span className={`text-[10px] px-1.5 py-0.5 rounded-full ${
+                    order.status === 'pending' ? 'bg-yellow-500/10 text-yellow-400' :
+                    order.status === 'confirmed' ? 'bg-blue-500/10 text-blue-400' :
+                    order.status === 'shipping' ? 'bg-purple-500/10 text-purple-400' :
+                    order.status === 'delivered' ? 'bg-green-500/10 text-green-400' :
+                    'bg-red-500/10 text-red-400'
+                  }`}>
+                    {order.status === 'pending' ? 'Chờ XN' :
+                     order.status === 'confirmed' ? 'Đã XN' :
+                     order.status === 'shipping' ? 'Đang giao' :
+                     order.status === 'delivered' ? 'Đã giao' : 'Đã hủy'}
+                  </span>
                 </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Blog tab */}
-        {tab === 'blog' && (
-          <div className="text-center py-20 text-gray-400">
-            <p>Quản lý bài viết — đang phát triển</p>
+              </div>
+            ))}
           </div>
         )}
       </div>

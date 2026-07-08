@@ -179,18 +179,20 @@ export default function TestimonialSection() {
         </div>
       </div>
 
-      {/* ═══ Masonry grid ═══ */}
+      {/* ═══ Masonry grid (CSS columns cho desktop, grid đơn cho mobile) ═══ */}
       <div className="container-page">
-        <div className="columns-1 sm:columns-2 lg:columns-3 gap-4 sm:gap-5 [column-fill:_balance]">
-          {testimonials.map((t) => {
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+          {testimonials.map((t, index) => {
             const isExpanded = expanded[t.id]
             const displayText = t.long && !isExpanded ? t.text : (t.textLong || t.text)
             const showMore = t.long && t.textLong
-
+            // Tạo chiều cao tự nhiên khác nhau cho masonry feel
+            const tallVariant = index % 4 === 0 || index % 7 === 0
+  
             return (
               <div
                 key={t.id}
-                className="break-inside-avoid mb-4 sm:mb-5"
+                className={`${tallVariant ? 'sm:row-span-1' : ''}`}
               >
                 <div className="bg-[#0f172a] border border-gray-800 rounded-xl p-5 sm:p-6 hover:border-[#b8860b]/20 transition-all duration-300 group">
                   {/* Quote icon */}

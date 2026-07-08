@@ -6,6 +6,7 @@ import Link from "next/link"
 import { ShoppingBag, Check, Share2, ChevronLeft, ChevronRight, Package } from "lucide-react"
 import { formatPrice, parseImages } from "@/lib/utils"
 import { useCartStore } from "@/lib/store"
+import { ShareButton } from "@/components/ui/ShareButton"
 import type { Product } from "@/types"
 
 export default function ProductDetailPage() {
@@ -213,9 +214,9 @@ export default function ProductDetailPage() {
             </button>
 
             {/* Share */}
-            <button className="mt-4 flex items-center gap-2 text-sm text-gray-500 hover:text-[#b8860b] transition-colors w-full justify-center py-2 border border-gray-800 rounded-lg hover:border-[#b8860b]/30">
-              <Share2 className="w-4 h-4" /> Chia sẻ
-            </button>
+            <div className="mt-4">
+              <ShareButton />
+            </div>
 
             {/* Description */}
             <div className="mt-8 pt-8 border-t border-gray-800">

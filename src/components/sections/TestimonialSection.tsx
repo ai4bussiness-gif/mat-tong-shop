@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Star, ChevronDown, ChevronUp, Quote } from "lucide-react"
 
 const testimonials = [
@@ -59,8 +59,7 @@ const testimonials = [
     rating: 5,
     text: "Tượng Quán Thế Âm nghìn tay thực sự là một kiệt tác. Mỗi cánh tay đều được chạm khắc riêng biệt, các chi tiết trang sức và hoa văn rất tinh xảo. Shop tư vấn nhiệt tình, đóng gói kỹ lưỡng.",
     long: true,
-    textLong:
-      "Tượng Quán Thế Âm nghìn tay thực sự là một kiệt tác. Mỗi cánh tay đều được chạm khắc riêng biệt, các chi tiết trang sức và hoa văn rất tinh xảo. Shop tư vấn nhiệt tình, đóng gói kỹ lưỡng. Giao hàng nhanh chóng, đúng hẹn. Tôi sẽ tiếp tục mua thêm các sản phẩm khác từ shop trong thời gian tới.",
+    textLong: "Tượng Quán Thế Âm nghìn tay thực sự là một kiệt tác. Mỗi cánh tay đều được chạm khắc riêng biệt, các chi tiết trang sức và hoa văn rất tinh xảo. Shop tư vấn nhiệt tình, đóng gói kỹ lưỡng. Giao hàng nhanh chóng, đúng hẹn. Tôi sẽ tiếp tục mua thêm các sản phẩm khác từ shop trong thời gian tới.",
   },
   {
     name: "Công Thành",
@@ -69,8 +68,7 @@ const testimonials = [
     rating: 5,
     text: "Tượng Phật Dược Sư mạ vàng rất đẹp, tay nghề điêu luyện. Khuôn mặt Phật hiền từ, ánh mắt nhân từ. Mạ vàng sáng đều, không bị lỗi. Shop gửi kèm giấy chứng nhận và quà tặng rất chu đáo.",
     long: true,
-    textLong:
-      "Tượng Phật Dược Sư mạ vàng rất đẹp, tay nghề điêu luyện. Khuôn mặt Phật hiền từ, ánh mắt nhân từ. Mạ vàng sáng đều, không bị lỗi. Shop gửi kèm giấy chứng nhận và quà tặng rất chu đáo. Đặc biệt ấn tượng với dịch vụ khách hàng của shop — họ tư vấn rất kỹ về kích thước phù hợp với không gian thờ của gia đình tôi.",
+    textLong: "Tượng Phật Dược Sư mạ vàng rất đẹp, tay nghề điêu luyện. Khuôn mặt Phật hiền từ, ánh mắt nhân từ. Mạ vàng sáng đều, không bị lỗi. Shop gửi kèm giấy chứng nhận và quà tặng rất chu đáo. Đặc biệt ấn tượng với dịch vụ khách hàng của shop — họ tư vấn rất kỹ về kích thước phù hợp với không gian thờ của gia đình tôi.",
   },
   {
     name: "Bảo Châu",
@@ -104,15 +102,76 @@ const testimonials = [
     text: "Tranh Thangka vẽ tay tinh xảo, màu sắc tươi sáng và hài hòa. Các chi tiết từ khuôn mặt Tara, hoa sen đến ánh sáng đều rất đẹp. Đóng khung chắc chắn, thích hợp làm quà tặng.",
     long: false,
   },
+  // ═══ 6 cảm nhận mới ═══
+  {
+    name: "Gia Bảo",
+    initials: "GB",
+    product: "Tượng Phật Thích Ca Mâu Ni Mạ Vàng 24K",
+    rating: 5,
+    text: "Lần đầu mua tượng Phật online mà không hề thất vọng. Tượng đẹp, chắc chắn, mạ vàng sáng loáng. Shop gửi tặng kèm túi vải và giấy chứng nhận rất chuyên nghiệp. Sẽ giới thiệu cho bạn bè.",
+    long: false,
+  },
+  {
+    name: "Diễm My",
+    initials: "DM",
+    product: "Tượng Tara Xanh Điêu Khắc Thủ Công",
+    rating: 5,
+    text: "Tượng Tara Xanh quá đẹp và linh thiêng. Từng đường nét chạm khắc tinh tế, màu sắc hài hòa. Mình đặt trên bàn thờ phòng khách, ai đến chơi cũng khen. Cảm ơn shop đã tư vấn nhiệt tình!",
+    long: false,
+  },
+  {
+    name: "Anh Khoa",
+    initials: "AK",
+    product: "Tượng Kim Cương Thủ Vajrapani",
+    rating: 5,
+    text: "Tượng Vajrapani uy mãnh, chất lượng tuyệt vời. Đồng đặc, mạ vàng dày, các chi tiết vòng lửa và chày kim cương chạm khắc rất công phu. Shop giao hàng siêu nhanh, đóng gói cực kỳ cẩn thận.",
+    long: true,
+    textLong: "Tượng Vajrapani uy mãnh, chất lượng tuyệt vời. Đồng đặc, mạ vàng dày, các chi tiết vòng lửa và chày kim cương chạm khắc rất công phu. Shop giao hàng siêu nhanh, đóng gói cực kỳ cẩn thận với nhiều lớp xốp và thùng gỗ. Tôi đã mua nhiều lần và lần nào cũng hài lòng. Đây là địa chỉ tin cậy cho người tu tập Mật Tông.",
+  },
+  {
+    name: "Quỳnh Trang",
+    initials: "QT",
+    product: "Tranh Thangka Phật Thích Ca Vẽ Tay",
+    rating: 5,
+    text: "Bức Thangka vẽ tay tỉ mỉ đến từng chi tiết nhỏ. Màu sắc tự nhiên, đường nét mượt mà. Khung gỗ đẹp, chắc chắn. Treo trong phòng thiền nhìn rất trang nghiêm. Cảm ơn shop đã tư vấn kích thước phù hợp.",
+    long: false,
+  },
+  {
+    name: "Trọng Nhân",
+    initials: "TN",
+    product: "Bộ Pháp Khí Chuông & Chày Kim Cương Mạ Vàng",
+    rating: 5,
+    text: "Bộ chuông chày chất lượng cao cấp. Chuông kêu trong trẻo, vang xa. Chày kim cương chạm khắc tinh xảo, mạ vàng sáng bóng. Shop tư vấn rất kỹ về cách chọn kích thước. Giao hàng nhanh, đóng gói chắc chắn.",
+    long: false,
+  },
+  {
+    name: "Mỹ Linh",
+    initials: "ML",
+    product: "Tượng Phật Dược Sư Mạ Vàng 24K",
+    rating: 5,
+    text: "Tượng Phật Dược Sư đẹp tuyệt vời! Khuôn mặt từ bi, lớp mạ vàng sáng đều. Mình đặt trên bàn thờ gia tiên, không gian thờ tự nhiên trang nghiêm hơn hẳn. Shop gửi kèm quà rất chu đáo, cảm ơn shop nhiều!",
+    long: false,
+  },
 ]
 
-const INITIAL_SHOW = 4
+const MOBILE_INITIAL = 4
+const DESKTOP_INITIAL = 8
 
 export default function TestimonialSection() {
   const [showAll, setShowAll] = useState(false)
+  const [limit, setLimit] = useState(MOBILE_INITIAL)
   const [expanded, setExpanded] = useState<Record<number, boolean>>({})
 
-  const visible = showAll ? testimonials : testimonials.slice(0, INITIAL_SHOW)
+  useEffect(() => {
+    // Responsive: mobile 4, desktop ≥8
+    const check = () => setLimit(window.innerWidth >= 1024 ? DESKTOP_INITIAL : MOBILE_INITIAL)
+    check()
+    window.addEventListener("resize", check)
+    return () => window.removeEventListener("resize", check)
+  }, [])
+
+  const visible = showAll ? testimonials : testimonials.slice(0, limit)
+  const remaining = testimonials.length - limit
 
   const toggleExpand = (index: number) => {
     setExpanded((prev) => ({ ...prev, [index]: !prev[index] }))
@@ -195,13 +254,13 @@ export default function TestimonialSection() {
         </div>
 
         {/* Global Load More */}
-        {!showAll && testimonials.length > INITIAL_SHOW && (
+        {!showAll && remaining > 0 && (
           <div className="text-center mt-10">
             <button
               onClick={() => setShowAll(true)}
               className="inline-flex items-center gap-2 px-6 py-3 border border-gray-600 text-gray-300 text-sm font-medium rounded-xl hover:bg-white/5 hover:border-[#b8860b] hover:text-[#b8860b] transition-all duration-200"
             >
-              Xem thêm ({testimonials.length - INITIAL_SHOW} đánh giá)
+              Xem thêm ({remaining} đánh giá)
               <ChevronDown className="w-4 h-4" />
             </button>
           </div>

@@ -2,7 +2,6 @@ import { notFound } from "next/navigation"
 import Link from "next/link"
 import { prisma } from "@/lib/db"
 import { CalendarDays, ChevronRight, Clock } from "lucide-react"
-import { ProductCard } from "@/components/ui/ProductCard"
 import { ShareButton } from "@/components/ui/ShareButton"
 import TestimonialSection from "@/components/sections/TestimonialSection"
 
@@ -13,14 +12,6 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
   const post = await prisma.blogPost.findUnique({ where: { slug } })
 
   if (!post || !post.published) notFound()
-
-  // Fetch related products
-  const relatedProducts = await prisma.product.findMany({
-    where: { inStock: true },
-    include: { category: true },
-    orderBy: { createdAt: "desc" },
-    take: 4,
-  })
 
   const wordCount = post.content.replace(/<[^>]*>/g, "").split(/\s+/).length
   const readTime = Math.max(1, Math.ceil(wordCount / 300))
@@ -115,25 +106,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             </article>
           </div>{/* end max-w-4xl */}
 
-          {/* ═══ Related Products — full-width ═══ */}
-          {relatedProducts.length > 0 && (
-            <section className="mt-12 sm:mt-16">
-              <div className="max-w-4xl mx-auto mb-8">
-                <p className="text-[#b8860b] text-xs sm:text-sm uppercase tracking-[0.2em] font-medium mb-1">
-                  Gợi Ý
-                </p>
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
-                  Sản Phẩm <span className="text-[#b8860b]">Liên Quan</span>
-                </h2>
-                <div className="w-12 h-0.5 bg-[#b8860b] mt-3 rounded-full" />
-              </div>
-              <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-                {relatedProducts.map((product) => (
-                  <ProductCard key={product.id} product={product} />
-                ))}
-              </div>
-            </section>
-          )}
+          {/* ═══ Related Products removed per user request ═══ */}
         </div>
       </div>
 

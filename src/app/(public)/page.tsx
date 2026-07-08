@@ -272,37 +272,6 @@ export default async function HomePage() {
           </div>
         </section>
       )}
-
-      {/* ═══ NEWSLETTER ═══ */}
-      <section className="py-12 bg-[#0f172a] border-t border-gray-800">
-        <div className="container-page">
-          <div className="max-w-lg mx-auto text-center">
-            <p className="text-[#b8860b] text-xs uppercase tracking-[0.2em] font-medium">
-              Cập Nhật
-            </p>
-            <h2 className="text-xl sm:text-2xl font-bold text-white mt-2 mb-3">
-              Đăng Ký Nhận Tin
-            </h2>
-            <p className="text-sm text-gray-400 mb-6">
-              Nhận thông tin về tượng mới, kiến thức Phật giáo và ưu đãi đặc biệt.
-            </p>
-            <form className="flex gap-2 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Email của bạn..."
-                className="flex-1 px-4 py-3 bg-gray-800 border border-gray-700 rounded-lg text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#b8860b]/30 focus:border-[#b8860b]"
-                required
-              />
-              <button
-                type="submit"
-                className="px-5 py-3 bg-[#b8860b] text-white text-sm font-medium rounded-lg hover:bg-[#a07608] transition-colors whitespace-nowrap"
-              >
-                Đăng Ký
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
     </>
   )
 }

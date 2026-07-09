@@ -97,7 +97,9 @@ export default function CheckoutPage() {
               <h3 className="text-white font-semibold text-sm mb-3">Thông tin chuyển khoản:</h3>
               <div className="space-y-2 text-sm">
                 {[
-                  { label: 'Ngân hàng', value: 'Vietcombank' },\n                  { label: 'Số tài khoản', value: '0021000403922' },\n                  { label: 'Chủ tài khoản', value: 'Hoàng Hà' },
+                  { label: 'Ngân hàng', value: 'Vietcombank' },
+                  { label: 'Số tài khoản', value: '0021000403922' },
+                  { label: 'Chủ tài khoản', value: 'Hoàng Hà' },
                   { label: 'Nội dung CK', value: transferContent || (orderId ? `CKMT${orderId}` : 'Tượng Mật Tông') },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center justify-between py-1.5 border-b border-gray-800 last:border-0">

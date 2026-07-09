@@ -87,11 +87,8 @@ export default async function HomePage() {
           <section key={col.slug} className={`py-10 sm:py-14 ${bgClass}`}>
             <div className="container-page">
               <div className="text-center mb-8">
-                <p className="text-[#b8860b] text-xs sm:text-sm uppercase tracking-[0.2em] font-medium">
-                  Explore our
-                </p>
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mt-2">
-                  <span className="text-[#b8860b]">{col.heading}</span> Collections
+                  <span className="text-[#b8860b]">{col.heading}</span>
                 </h2>
                 <p className="text-gray-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">
                   {col.desc}

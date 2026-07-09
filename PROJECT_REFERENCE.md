@@ -156,6 +156,9 @@ mat-tong-shop/
 | 2026-07-09 | **Tái cấu trúc danh mục: 13 → 6** — bỏ Thangka, Pháp Khí, Tượng Lớn, Linh Vật; gộp Di Lặc→Phật, Dakini→Phật Mẫu, Guru→Đại Sư; chuyển Garuda→Hộ Pháp | `prisma/seed.ts`, `src/lib/constants.ts`, `src/app/(public)/page.tsx`, `src/app/not-found.tsx`, `src/components/ui/HeroSlider.tsx`, `src/components/sections/HomeSections.tsx` |
 | 2026-07-09 | Grid danh mục: 2 hàng × 3 cột desktop, ảnh to hơn `aspect-[4/5]` | `src/app/(public)/page.tsx` |
 | 2026-07-09 | Push code + re-seed DB Neon (48 products) | GitHub master |
+| 2026-07-09 | Đổi logo text → ảnh logo crop 300×80, height 48px | `src/components/layout/Header.tsx` |
+| 2026-07-09 | Thêm favicon từ Cloudinary | `src/app/layout.tsx` |
+| 2026-07-09 | Update metadata title + description | `src/app/layout.tsx` |
 
 ---
 

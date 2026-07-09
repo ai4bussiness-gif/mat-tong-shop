@@ -43,7 +43,7 @@ export function Header() {
             <img
               src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
               alt="Mật Tông"
-              className="w-auto max-w-full"
+              className="w-auto max-w-full logo-gold"
               style={{ height: '48px' }}
             />
           </Link>
@@ -153,7 +153,7 @@ export function Header() {
                 <img
                   src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
                   alt="Mật Tông"
-                  className="w-auto"
+                  className="w-auto logo-gold"
                   style={{ height: '40px' }}
                 />
               </Link>

@@ -100,3 +100,12 @@ img {
   background: var(--accent);
   border-radius: 2px;
 }
+
+/* Logo gold tone — tối hơn, ấm hơn, phù hợp nền tối */
+.logo-gold {
+  filter: brightness(0.72) sepia(0.45) saturate(2.2) drop-shadow(0 0 8px rgba(184, 134, 11, 0.25));
+  transition: filter 0.4s ease;
+}
+.logo-gold:hover {
+  filter: brightness(0.78) sepia(0.4) saturate(2) drop-shadow(0 0 14px rgba(184, 134, 11, 0.5));
+}

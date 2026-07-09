@@ -161,6 +161,7 @@ mat-tong-shop/
 | 2026-07-09 | Update metadata title + description | `src/app/layout.tsx` |
 | 2026-07-09 | Bỏ "Explore our" + "Collections" khỏi heading section — giữ thuần tên danh mục | `src/app/(public)/page.tsx` |
 | 2026-07-09 | Thêm "Chư" vào heading: "Chư Phật", "Chư Bồ Tát"... tách 2 màu (xám + vàng) | `src/app/(public)/page.tsx` |
+| 2026-07-09 | Việt hóa: Danh Mục, Mới Nhất, Bài Viết; tăng size catalogue (text-4xl) | `src/app/(public)/page.tsx` |
 
 ---
 

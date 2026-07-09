@@ -6,7 +6,7 @@ export function HeroSlider() {
       <div className="relative min-h-[450px] sm:min-h-[550px] lg:min-h-[650px] flex items-center justify-center">
         {/* Hero background image */}
         <img
-          src="https://nidhiratna.com/cdn/shop/files/Green_Tara_Statues_Banner.jpg"
+          src="https://res.cloudinary.com/zgl5avbd/image/upload/v1/mat-tong/hero-banner.jpg"
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />
@@ -28,21 +28,15 @@ export function HeroSlider() {
             <span className="text-[#b8860b]">Thủ Công Nepal</span>
           </h1>
           <p className="text-sm sm:text-base lg:text-lg text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Tượng đồng mạ vàng 24K, pháp khí, tranh Thangka nhập khẩu trực tiếp từ Nepal, Tây Tạng.
+            Tượng đồng mạ vàng 24K nhập khẩu trực tiếp từ Nepal, Tây Tạng.
             Hàng thủ công 100% từ các nghệ nhân chế tác.
           </p>
           <div className="flex items-center justify-center gap-4">
             <Link
-              href="/danh-muc/tuong-phat"
+              href="/danh-muc/phat"
               className="inline-flex px-8 py-4 bg-[#b8860b] text-white text-base font-semibold rounded-xl hover:bg-[#a07608] transition-colors shadow-lg shadow-[#b8860b]/25"
             >
               Khám Phá Ngay
-            </Link>
-            <Link
-              href="/danh-muc/phap-khi"
-              className="inline-flex px-8 py-4 border-2 border-white/20 text-white text-base font-semibold rounded-xl hover:bg-white/10 transition-colors"
-            >
-              Pháp Khí
             </Link>
           </div>
         </div>

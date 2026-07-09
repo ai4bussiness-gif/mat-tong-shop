@@ -1,7 +1,7 @@
 export const siteConfig = {
   name: 'Mật Tông',
-  tagline: 'Tượng Phật Thủ Công & Vật Phẩm Mật Tông',
-  description: 'Chuyên tượng Phật Mật Tông thủ công nhập khẩu Nepal, Tây Tạng. Tượng đồng, pháp khí, tranh Thangka, linh phẩm chính gốc.',
+  tagline: 'Tượng Phật Thủ Công Mật Tông',
+  description: 'Chuyên tượng Phật Mật Tông thủ công nhập khẩu Nepal, Tây Tạng. Tượng đồng mạ vàng 24K, linh phẩm Phật giáo chính gốc.',
   email: 'info@mattongshop.com',
   phone: '0977 693 109',
   address: 'Việt Nam',
@@ -17,15 +17,12 @@ export const siteConfig = {
 }
 
 export const categories = [
-  { slug: 'tuong-phat', name: 'Tượng Phật', image: '' },
-  { slug: 'tuong-bo-tat', name: 'Tượng Bồ Tát', image: '' },
-  { slug: 'tuong-tara', name: 'Tượng Tara', image: '' },
-  { slug: 'tuong-dakini', name: 'Tượng Dakini', image: '' },
-  { slug: 'tuong-guru', name: 'Tượng Guru', image: '' },
-  { slug: 'tuong-than-tai', name: 'Tượng Thần Tài', image: '' },
-  { slug: 'tuong-lon', name: 'Tượng Kích Thước Lớn', image: '' },
-  { slug: 'phap-khi', name: 'Pháp Khí', image: '' },
-  { slug: 'tranh-thangka', name: 'Tranh Thangka', image: '' },
+  { slug: 'phat', name: 'Phật', image: '' },
+  { slug: 'bo-tat', name: 'Bồ Tát', image: '' },
+  { slug: 'phat-mau', name: 'Phật Mẫu', image: '' },
+  { slug: 'ho-phap', name: 'Hộ Pháp', image: '' },
+  { slug: 'dai-su', name: 'Đại Sư', image: '' },
+  { slug: 'than-tai', name: 'Thần Tài', image: '' },
 ] as const
 
 export const sortOptions = [
@@ -44,10 +41,10 @@ export const orderStatusMap: Record<string, string> = {
 }
 
 export const COLLECTION_NAMES: Record<string, string> = {
-  'tuong-phat': 'Buddha',
-  'tuong-bo-tat': 'Bodhisattva',
-  'tuong-tara': 'Tara',
-  'tuong-dakini': 'Dakini',
-  'tuong-guru': 'Guru',
-  'tuong-than-tai': 'Wealth Deity',
+  'phat': 'Phật',
+  'bo-tat': 'Bồ Tát',
+  'phat-mau': 'Phật Mẫu',
+  'ho-phap': 'Hộ Pháp',
+  'dai-su': 'Đại Sư',
+  'than-tai': 'Thần Tài',
 }

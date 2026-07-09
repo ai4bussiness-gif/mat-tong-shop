@@ -19,7 +19,7 @@ export function HomeSections({ products }: { products: Product[] }) {
   }
 
   // Show collection sections for the key categories that match nidhiratna's layout
-  const collectionOrder = ['tuong-phat', 'tuong-bo-tat', 'tuong-tara', 'tuong-dakini', 'tuong-guru', 'tuong-than-tai']
+  const collectionOrder = ['phat', 'bo-tat', 'phat-mau', 'ho-phap', 'dai-su', 'than-tai']
 
   return (
     <>

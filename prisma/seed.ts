@@ -2,50 +2,83 @@ import { PrismaClient } from '@prisma/client'
 
 const prisma = new PrismaClient()
 
-// ── Verified nidhiratna.com CDN image URLs ──
-// All verified via browser: every URL returns a valid image (3200x4000, 1500x1875, etc.)
+// ── Verified Cloudinary image URLs ──
 const IMG = {
   // Category images
-  phat: 'https://nidhiratna.com/cdn/shop/files/Shakyamuni_enlighted_Buddha_Statue_99b1c8be-9dab-40f6-bd48-3aadd66c4f6f.jpg',
-  boTat: 'https://nidhiratna.com/cdn/shop/files/Vajrapani-Statue_64613a73-953c-4722-8683-b55d550dc44a.jpg',
-  tara: 'https://nidhiratna.com/cdn/shop/files/Buddhist-Tara-statues-collection-including-Green-Tara-and-White-Tara-along-with-their-manifestation-sacred-handcrafted-sculptures.jpg',
-  dakini: 'https://nidhiratna.com/cdn/shop/files/handmade-troma-nagmo-statue-in-gold-gilded-copper-front-view-crafted-in-nepal-for-vajrayana-practice.jpg',
-  guru: 'https://nidhiratna.com/cdn/shop/files/GTAA_1_of_16.jpg',
-  thanTai: 'https://nidhiratna.com/cdn/shop/files/gold-crowned-dzambhala-throne-statue-25-inch-nepal-handcrafted-gilded-copper-full-view.jpg',
-  lon: 'https://nidhiratna.com/cdn/shop/files/Large-Size-Statue-Collection-of-handmade-Tibetan-Buddhist-copper-statues-with-fire-gold-gilding-for-temple-altars-and-Dharma-centers.jpg',
-  phapKhi: 'https://nidhiratna.com/cdn/shop/files/YT.jpg',
-  thangka: 'https://nidhiratna.com/cdn/shop/files/Nidhiratna_Statues.png',
+  phat: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/phat.jpg',
+  boTat: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/boTat.jpg',
+  tara: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/tara.jpg',
+  dakini: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/dakini.jpg',
+  guru: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/guru.jpg',
+  thanTai: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/thanTai.jpg',
+  garuda: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/garuda.jpg',
+
+  // Hộ Pháp & Protectors
+  mahakala4: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/mahakala4.jpg',
+  whiteMahakala: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/whiteMahakala.jpg',
+  mahakala6: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/mahakala6.jpg',
+  achala: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/achala.jpg',
+  chakrasamvara: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/chakrasamvara.jpg',
+  hevajra: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/hevajra.jpg',
+  kalachakra: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/kalachakra.jpg',
+
+  // Phật Di Lặc
+  maitreyaSeated: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/maitreyaSeated.jpg',
+  maitreyaStanding: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/maitreyaStanding.jpg',
+  maitreyaLarge: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/maitreyaLarge.jpg',
+  amoghasiddhi: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/amoghasiddhi.jpg',
+
+  // Đại Sư & Thánh Tăng
+  milarepa1: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/milarepa1.jpg',
+  milarepa2: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/milarepa2.jpg',
+  tsongkhapa: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/tsongkhapa.jpg',
+
+  // Kim Sí Điểu & Linh Vật
+  garudaGold: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/garudaGold.jpg',
+
+  // Bồ Tát & bổ sung
+  ksitigarbha: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/ksitigarbha.jpg',
+  vajrasattva: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrasattva.jpg',
+  vajrayogini: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrayogini.jpg',
+  chenrezig4arm: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/chenrezig4arm.jpg',
+
+  // Thần Tài bổ sung
+  vasudhara: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vasudhara.jpg',
+  ganesha: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/ganesha.jpg',
+  ganesha4arm: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/ganesha4arm.jpg',
+
+  // Tara bổ sung
+  greenTaraSmall: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/greenTaraSmall.jpg',
+  tara21set: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/tara21set.jpg',
+
   // Product images
-  shakyamuniGold: 'https://nidhiratna.com/cdn/shop/files/Shakyamuni_enlighted_Buddha_Statue_99b1c8be-9dab-40f6-bd48-3aadd66c4f6f.jpg',
-  shakyamuniOxidized: 'https://nidhiratna.com/cdn/shop/files/shakyamuni-buddha-statue-seated-on-double-lotus-pedestal-with-oxidized-copper-finish-from-nepal.jpg',
-  vajrapaniGold: 'https://nidhiratna.com/cdn/shop/files/Vajrapani-Statue_64613a73-953c-4722-8683-b55d550dc44a.jpg',
-  vajrapaniHC: 'https://nidhiratna.com/cdn/shop/files/vajrapani-statue-handcrafted-in-copper-with-24k-gold-fire-gilded-finish-by-newari-artisans-from-patan-nepal.jpg',
-  vajrapaniSide: 'https://nidhiratna.com/cdn/shop/files/side-view-of-vajrapani-buddhist-protector-statue-holding-vajra-and-lasso-on-lotus-pedestal.jpg',
-  vajrapaniCloseup: 'https://nidhiratna.com/cdn/shop/files/close-up-of-vajrapani-statue-with-gold-painted-face-and-semi-precious-stone-ornaments.jpg',
-  guruRimpoche: 'https://nidhiratna.com/cdn/shop/files/GTAA_1_of_16.jpg',
-  taraGreen: 'https://nidhiratna.com/cdn/shop/files/green-tara-statue-oxidized-copper-handmade-in-nepal-buddhist-altar-sculpture.jpg',
-  taraColl: 'https://nidhiratna.com/cdn/shop/files/Buddhist-Tara-statues-collection-including-Green-Tara-and-White-Tara-along-with-their-manifestation-sacred-handcrafted-sculptures.jpg',
-  tromaNagmoFront: 'https://nidhiratna.com/cdn/shop/files/handmade-troma-nagmo-statue-in-gold-gilded-copper-front-view-crafted-in-nepal-for-vajrayana-practice.jpg',
-  tromaNagmoLarge: 'https://nidhiratna.com/cdn/shop/files/large-troma-nagmo-statue-with-dimensions-handcrafted-copper-buddhist-sculpture-from-nepal.jpg',
-  tromaNagmoAngle: 'https://nidhiratna.com/cdn/shop/files/angled-view-of-handmade-troma-nagmo-statue-with-intricate-gold-gilded-himalayan-craftsmanship.jpg',
-  tromaNagmoCloseup: 'https://nidhiratna.com/cdn/shop/files/close-up-of-troma-nagmo-statues-fierce-face-with-hand-painted-details-and-gold-crown.jpg',
-  vajrakilayaFront: 'https://nidhiratna.com/cdn/shop/files/front-view-of-vajrakilaya-deity-holding-vajra-and-ritual-knife-with-sacred-phurba-and-blazing-halo.jpg',
-  vajrakilayaSide: 'https://nidhiratna.com/cdn/shop/files/side-view-of-vajrakilaya-statue-with-lotus-pedestal-intricate-himalayan-craftsmanship.jpg',
-  vajrakilayaCloseup: 'https://nidhiratna.com/cdn/shop/files/close-up-of-vajrakilaya-statue-with-gold-painted-face-and-wrathful-expression.jpg',
-  manjushri1: 'https://nidhiratna.com/cdn/shop/files/manjushri-bodhisattva-statue-handcrafted-copper-with-oxidized-finish-and-gold-painted-face-from-nepal.jpg',
-  manjushri2: 'https://nidhiratna.com/cdn/shop/files/manjushri-bodhisattva-statue-handcrafted-in-copper-with-oxidized-finish-and-gold-painted-face-from-nepal.jpg',
-  amitayus: 'https://nidhiratna.com/cdn/shop/files/amitayus-buddha-statue-handcrafted-in-copper-with-oxidized-finish-and-gold-painted-face-from-nepal.jpg',
-  jambhala: 'https://nidhiratna.com/cdn/shop/files/jambhala-statue-handmade-in-nepal-copper-with-oxidized-and-silver-plated-finish-gold-painted-face.jpg',
-  dzambhalaBlack: 'https://nidhiratna.com/cdn/shop/files/front-view-of-black-dzambhala-statue-handmade-in-nepal-copper-sculpture-with-gold-gilded-details.jpg',
-  dzambhalaThrone: 'https://nidhiratna.com/cdn/shop/files/gold-crowned-dzambhala-throne-statue-25-inch-nepal-handcrafted-gilded-copper-full-view.jpg',
-  threeBuddha: 'https://nidhiratna.com/cdn/shop/files/three-buddha-statue-collection-handmade-in-nepal-24k-gold-fire-gilded-buddhist-art.jpg',
-  medicineBuddha: 'https://nidhiratna.com/cdn/shop/files/medicine-buddha-statue-handmade-copper-24k-gold-fire-gilded-lotus-throne-nepal.jpg',
-  amitabha: 'https://nidhiratna.com/cdn/shop/files/amitabha-buddha-statue-handmade-in-nepal-24k-gold-fire-gilded-copper-lotus-throne.jpg',
-  largeCollection: 'https://nidhiratna.com/cdn/shop/files/Large-Size-Statue-Collection-of-handmade-Tibetan-Buddhist-copper-statues-with-fire-gold-gilding-for-temple-altars-and-Dharma-centers.jpg',
-  bellGhanta: 'https://nidhiratna.com/cdn/shop/files/YT.jpg',
-  thangkaImg: 'https://nidhiratna.com/cdn/shop/files/Nidhiratna_Statues.png',
-  f3Vajrapani: 'https://nidhiratna.com/cdn/shop/files/F-3_8ace97e9-2d3e-4a86-bfce-939df00e23f6.jpg',
-  f3Vajrakilaya: 'https://nidhiratna.com/cdn/shop/files/F-3_3804270a-77de-413f-bc8e-8ef3357a7b1b.jpg',
+  shakyamuniGold: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/shakyamuniGold.jpg',
+  shakyamuniOxidized: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/shakyamuniOxidized.jpg',
+  vajrapaniGold: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrapaniGold.jpg',
+  vajrapaniHC: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrapaniHC.jpg',
+  vajrapaniSide: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrapaniSide.jpg',
+  vajrapaniCloseup: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrapaniCloseup.jpg',
+  guruRimpoche: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/guruRimpoche.jpg',
+  taraGreen: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/taraGreen.jpg',
+  taraColl: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/taraColl.jpg',
+  tromaNagmoFront: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/tromaNagmoFront.jpg',
+  tromaNagmoLarge: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/tromaNagmoLarge.jpg',
+  tromaNagmoAngle: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/tromaNagmoAngle.jpg',
+  tromaNagmoCloseup: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/tromaNagmoCloseup.jpg',
+  vajrakilayaFront: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrakilayaFront.jpg',
+  vajrakilayaSide: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrakilayaSide.jpg',
+  vajrakilayaCloseup: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/vajrakilayaCloseup.jpg',
+  dzambhalaThrone: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/dzambhalaThrone.jpg',
+  dzambhalaBlack: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/dzambhalaBlack.jpg',
+  jambhala: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/jambhala.jpg',
+  amitabha: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/amitabha.jpg',
+  medicineBuddha: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/medicineBuddha.jpg',
+  manjushri1: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/manjushri1.jpg',
+  manjushri2: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/manjushri2.jpg',
+  largeCollection: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/largeCollection.jpg',
+  threeBuddha: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/threeBuddha.jpg',
+  f3Vajrapani: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/f3Vajrapani.jpg',
+  f3Vajrakilaya: 'https://res.cloudinary.com/zgl5avbd/image/upload/mat-tong/f3Vajrakilaya.jpg',
 }
 
 async function main() {
@@ -56,27 +89,26 @@ async function main() {
 
   console.log('🗑️  Cleared existing data')
 
-  // ── Categories ──
+  // ── 7 Categories (Phương án A) ──
   const catData = [
-    { name: 'Tượng Phật', slug: 'tuong-phat', image: IMG.phat },
-    { name: 'Tượng Bồ Tát', slug: 'tuong-bo-tat', image: IMG.boTat },
-    { name: 'Tượng Tara', slug: 'tuong-tara', image: IMG.tara },
-    { name: 'Tượng Dakini', slug: 'tuong-dakini', image: IMG.dakini },
-    { name: 'Tượng Guru', slug: 'tuong-guru', image: IMG.guru },
-    { name: 'Tượng Thần Tài', slug: 'tuong-than-tai', image: IMG.thanTai },
-    { name: 'Tượng Kích Thước Lớn', slug: 'tuong-lon', image: IMG.lon },
-    { name: 'Pháp Khí', slug: 'phap-khi', image: IMG.phapKhi },
-    { name: 'Tranh Thangka', slug: 'tranh-thangka', image: IMG.thangka },
+    { name: 'Phật', slug: 'phat', image: IMG.phat },
+    { name: 'Bồ Tát', slug: 'bo-tat', image: IMG.boTat },
+    { name: 'Phật Mẫu', slug: 'phat-mau', image: IMG.tara },
+    { name: 'Hộ Pháp', slug: 'ho-phap', image: IMG.mahakala4 },
+    { name: 'Đại Sư', slug: 'dai-su', image: IMG.guru },
+    { name: 'Thần Tài', slug: 'than-tai', image: IMG.thanTai },
   ]
 
   const cats = await Promise.all(catData.map((c) => prisma.category.create({ data: c })))
-  const [phat, boTat, tara, dakini, guru, thanTai, lon, phapKhi, thangka] = cats
+  const [phat, boTat, phatMau, hoPhap, daiSu, thanTai] = cats
 
   console.log(`📂 Categories: ${cats.length}`)
 
-  // ── Products (27 products across all 9 categories) ──
+  // ── Products (statues only) ──
   const products = [
-    // ── Tượng Phật (5 products) ──
+    // ═══════════════════════════════════════════
+    // PHẬT (12 products)
+    // ═══════════════════════════════════════════
     {
       name: 'Tượng Phật Thích Ca Mâu Ni Mạ Vàng 24K',
       slug: 'tuong-phat-thich-ca-mau-ni',
@@ -137,7 +169,96 @@ async function main() {
       categoryId: phat.id,
       featured: true,
     },
-    // ── Tượng Bồ Tát (4 products) ──
+    {
+      name: 'Tượng Phật Bất Không Thành Tựu (Amoghasiddhi)',
+      slug: 'tuong-phat-bat-khong-thanh-tuu',
+      description: 'Tượng Phật Bất Không Thành Tựu (Amoghasiddhi) — một trong Ngũ Trí Như Lai, cai quản phương Bắc. Ngài tay kết ấn vô úy, tọa trên đế sen xanh, biểu tượng cho sự thành tựu mọi công đức. Đồng mạ vàng 24K, chế tác Nepal.',
+      price: 40034000,
+      images: JSON.stringify([IMG.amoghasiddhi]),
+      dimensions: '30cm x 20cm',
+      weight: '4.0 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phat.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Kim Cương Tát Đỏa (Vajrasattva)',
+      slug: 'tuong-kim-cuong-tat-doa',
+      description: 'Tượng Kim Cương Tát Đỏa (Vajrasattva) — vị Phật Mật Tông chủ trì pháp môn sám hối và tịnh hóa. Tay phải cầm chày kim cương (vajra) trước tim, tay trái cầm chuông (ghanta) ở hông. Biểu tượng của sự thanh tịnh và giác ngộ.',
+      price: 26690000,
+      images: JSON.stringify([IMG.vajrasattva]),
+      dimensions: '22cm x 15cm',
+      weight: '2.5 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phat.id,
+      featured: false,
+    },
+    // ── Phật Di Lặc (gộp vào Phật) ──
+    {
+      name: 'Tượng Phật Di Lặc Ngồi Thiền Trên Ngai',
+      slug: 'tuong-phat-di-lac-ngoi-thien',
+      description: 'Tượng Phật Di Lặc (Maitreya) — vị Phật tương lai, hiện đang tu tập tại cung trời Đâu Suất. Ngồi trên ngai cao, tay kết ấn chuyển pháp luân, thần thái từ bi trang nghiêm. Đồng mạ vàng 24K, chế tác thủ công tinh xảo. Thích hợp đặt trên bàn thờ Phật gia chính.',
+      price: 53379000,
+      images: JSON.stringify([IMG.maitreyaSeated]),
+      dimensions: '35cm x 25cm',
+      weight: '5.0 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phat.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Phật Di Lặc Đứng',
+      slug: 'tuong-phat-di-lac-dung',
+      description: 'Tượng Phật Di Lặc đứng trên tòa sen — biểu tượng của tương lai Phật pháp. Hai tay kết ấn thuyết pháp. Phần đế sen được chạm khắc hoa văn tinh tế. Sản phẩm nhập khẩu Nepal, đồng mạ vàng 24K.',
+      price: 37365000,
+      images: JSON.stringify([IMG.maitreyaStanding]),
+      dimensions: '28cm x 12cm',
+      weight: '3.2 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phat.id,
+      featured: false,
+    },
+    {
+      name: 'Tượng Phật Di Lặc Lớn Trên Ngai Cao',
+      slug: 'tuong-phat-di-lac-lon-tren-ngai',
+      description: 'Tượng Phật Di Lặc kích thước lớn trên ngai vàng chạm khắc công phu. Toàn thân mạ vàng 24K lửa (fire gilding), các chi tiết hoa văn trên ngai được chạm tay tỉ mỉ. Phù hợp cho chùa, thiền viện hoặc phòng thờ lớn.',
+      price: 186825000,
+      images: JSON.stringify([IMG.maitreyaLarge]),
+      dimensions: '55cm x 38cm',
+      weight: '12.8 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phat.id,
+      featured: true,
+    },
+    // ── Từ Tượng Lớn (đồ chuyển về Phật) ──
+    {
+      name: 'Bộ Sưu Tập Ba Tượng Phật Mạ Vàng',
+      slug: 'bo-suu-tap-ba-tuong-phat-ma-vang',
+      description: 'Bộ ba tượng Phật mạ vàng 24K lửa: Phật Thích Ca, Phật A Di Đà và Phật Dược Sư. Mỗi tượng cao 21cm, chế tác thủ công tại Nepal. Bộ sưu tập hoàn hảo cho phòng thờ lớn.',
+      price: 80089000,
+      images: JSON.stringify([IMG.threeBuddha, IMG.largeCollection]),
+      dimensions: '21cm x 14cm (mỗi tượng)',
+      weight: '9.0 kg (cả bộ)',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phat.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Phật A Di Đà Cao Cấp Lớn',
+      slug: 'tuong-phat-a-di-da-lon',
+      description: 'Tượng Phật A Di Đà kích thước lớn, tay kết ấn thiền định ôm bình bát. Toàn thân mạ vàng 24K, đế sen chạm khắc tinh tế. Phù hợp đặt tại chánh điện, thiền viện. Nhập khẩu trực tiếp từ Nepal.',
+      price: 80054000,
+      images: JSON.stringify([IMG.threeBuddha]),
+      dimensions: '18cm x 12cm',
+      weight: '8.0 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phat.id,
+      featured: false,
+    },
+
+    // ═══════════════════════════════════════════
+    // BỒ TÁT (8 products)
+    // ═══════════════════════════════════════════
     {
       name: 'Tượng Quán Thế Âm Bồ Tát Nghìn Tay',
       slug: 'tuong-quan-the-am-nghin-tay',
@@ -186,7 +307,59 @@ async function main() {
       categoryId: boTat.id,
       featured: false,
     },
-    // ── Tượng Tara (3 products) ──
+    {
+      name: 'Tượng Địa Tạng Vương Bồ Tát (Ksitigarbha)',
+      slug: 'tuong-dia-tang-vuong-bo-tat',
+      description: 'Tượng Địa Tạng Vương Bồ Tát (Kshitigarbha) — Nguyện "Địa Ngục Vị Không, Thệ Bất Thành Phật". Tay cầm tích trượng (khakkhara) và bảo châu như ý. Đầu trọc, thân khoác cà sa Phật giáo. Đồng mạ vàng, chế tác thủ công Nepal.',
+      price: 37365000,
+      images: JSON.stringify([IMG.ksitigarbha]),
+      dimensions: '26cm x 16cm',
+      weight: '3.0 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: boTat.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Quán Thế Âm Bồ Tát Bốn Tay (4-Arm Chenrezig)',
+      slug: 'tuong-quan-the-am-bon-tay',
+      description: 'Tượng Quán Thế Âm Bồ Tát bốn tay — hóa thân phổ biến nhất của Đức Quán Thế Âm trong Mật Tông. Hai tay chính chắp trước ngực, tay phụ cầm chuỗi hạt và sen trắng. Da màu trắng, ngồi trên tòa sen. Biểu tượng của lòng từ bi bất tận.',
+      price: 29359000,
+      images: JSON.stringify([IMG.chenrezig4arm]),
+      dimensions: '22cm x 14cm',
+      weight: '2.4 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: boTat.id,
+      featured: false,
+    },
+    // ── Từ Tượng Lớn (đồ chuyển về Bồ Tát) ──
+    {
+      name: 'Tượng Kim Cương Thủ Vajrapani Cao 61cm',
+      slug: 'tuong-kim-cuong-thu-61cm',
+      description: 'Tượng Kim Cương Thủ Bồ Tát (Vajrapani) kích thước lớn 61.5cm. Chế tác từ đồng nguyên chất đặc, tay cầm chày kim cương và thòng lọng. Uy lực và oai nghiêm, phù hợp cho chánh điện.',
+      price: 160107000,
+      images: JSON.stringify([IMG.vajrapaniGold, IMG.f3Vajrapani]),
+      dimensions: '61.5cm x 46.5cm',
+      weight: '12 kg',
+      material: 'Đồng nguyên chất',
+      categoryId: boTat.id,
+      featured: false,
+    },
+    {
+      name: 'Tượng Quán Thế Âm Nghìn Tay Lớn',
+      slug: 'tuong-quan-the-am-nghin-tay-lon',
+      description: 'Tượng Quán Thế Âm Bồ Tát nghìn tay (Sahasrabhuja Avalokiteshvara) kích thước lớn. 11 đầu, 1000 cánh tay xếp thành vòng hào quang. Chế tác thủ công tại Nepal, mạ vàng 24K. Một kiệt tác điêu khắc Phật giáo hiếm có.',
+      price: 186825000,
+      images: JSON.stringify([IMG.chenrezig4arm]),
+      dimensions: '50cm x 40cm',
+      weight: '14.5 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: boTat.id,
+      featured: true,
+    },
+
+    // ═══════════════════════════════════════════
+    // PHẬT MẪU (8 products — Tara + Dakini + Vajrayogini)
+    // ═══════════════════════════════════════════
     {
       name: 'Tượng Tara Xanh (Green Tara) Điêu Khắc Thủ Công',
       slug: 'tuong-tara-xanh-dieu-khac',
@@ -196,7 +369,7 @@ async function main() {
       dimensions: '33cm x 24cm',
       weight: '4.8 kg',
       material: 'Đồng mạ vàng 24K, đá bán quý',
-      categoryId: tara.id,
+      categoryId: phatMau.id,
       featured: true,
     },
     {
@@ -208,7 +381,7 @@ async function main() {
       dimensions: '28cm x 20cm',
       weight: '3.6 kg',
       material: 'Đồng mạ vàng 24K',
-      categoryId: tara.id,
+      categoryId: phatMau.id,
       featured: false,
     },
     {
@@ -220,10 +393,9 @@ async function main() {
       dimensions: '30cm x 22cm',
       weight: '4.0 kg',
       material: 'Đồng mạ vàng 24K',
-      categoryId: tara.id,
+      categoryId: phatMau.id,
       featured: false,
     },
-    // ── Tượng Dakini (2 products) ──
     {
       name: 'Tượng Dakini Troma Nagmo Kích Thước Lớn',
       slug: 'tuong-dakini-troma-nagmo-lon',
@@ -233,7 +405,7 @@ async function main() {
       dimensions: '64.5cm x 46cm',
       weight: '15.2 kg',
       material: 'Đồng mạ vàng 24K, sơn màu',
-      categoryId: dakini.id,
+      categoryId: phatMau.id,
       featured: true,
     },
     {
@@ -245,10 +417,138 @@ async function main() {
       dimensions: '45cm x 32cm',
       weight: '8.5 kg',
       material: 'Đồng mạ vàng 24K',
-      categoryId: dakini.id,
+      categoryId: phatMau.id,
       featured: false,
     },
-    // ── Tượng Guru (2 products) ──
+    {
+      name: 'Tượng Tara Xanh Nhỏ Bằng Đồng',
+      slug: 'tuong-tara-xanh-nho',
+      description: 'Tượng Tara Xanh (Green Tara) cỡ nhỏ, chế tác từ đồng nguyên chất. Phật Mẫu ngồi trên tòa sen, tay phải kết ấn ban phước lành. Phù hợp cho bàn thờ nhỏ tại gia hoặc làm quà tặng Phật tử.',
+      price: 24021000,
+      images: JSON.stringify([IMG.greenTaraSmall]),
+      dimensions: '16cm x 11cm',
+      weight: '1.5 kg',
+      material: 'Đồng mạ vàng',
+      categoryId: phatMau.id,
+      featured: false,
+    },
+    {
+      name: 'Tượng Bộ 21 Tara Mạ Vàng',
+      slug: 'tuong-bo-21-tara',
+      description: 'Bộ sưu tập 21 tượng Tara — 21 hóa thân của Phật Mẫu Tara theo truyền thống Tây Tạng. Mỗi tượng có sắc màu và pháp khí riêng. Bộ 21 tượng được chế tác tinh xảo, mạ vàng 24K. Thích hợp cho pháp đường và thiền viện lớn.',
+      price: 240210000,
+      images: JSON.stringify([IMG.tara21set]),
+      dimensions: '12cm x 8cm (mỗi tượng)',
+      weight: '8.5 kg (cả bộ)',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phatMau.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Kim Cương Du Già Mẫu (Vajrayogini)',
+      slug: 'tuong-kim-cuong-du-gia-mau',
+      description: 'Tượng Kim Cương Du Già Mẫu (Vajrayogini) — Dakini tối cao của Mật Tông, hóa thân nữ giới của trí tuệ. Thân màu đỏ, tay cầm dao cong và chén sọ, nhảy múa trên xác người. Biểu tượng của sự chuyển hóa vô minh thành trí tuệ.',
+      price: 37365000,
+      images: JSON.stringify([IMG.vajrayogini]),
+      dimensions: '24cm x 16cm',
+      weight: '2.8 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: phatMau.id,
+      featured: true,
+    },
+
+    // ═══════════════════════════════════════════
+    // HỘ PHÁP (7 products)
+    // ═══════════════════════════════════════════
+    {
+      name: 'Tượng Hộ Pháp Mahakala Bốn Tay Mạ Vàng',
+      slug: 'tuong-ho-phap-mahakala-bon-tay',
+      description: 'Tượng Hộ Pháp Mahakala bốn tay (Chaturbhuja Mahakala) — vị hộ pháp uy mãnh nhất trong Mật Tông Tây Tạng. Chế tác từ đồng mạ vàng 24K, bốn tay cầm các pháp khí biểu tượng. Thần thái dữ tợn, đội vương miện đầu lâu, thân đeo xương người. Bảo vệ Phật pháp và hành giả.',
+      price: 42703000,
+      images: JSON.stringify([IMG.mahakala4]),
+      dimensions: '30cm x 22cm',
+      weight: '4.2 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: hoPhap.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Hộ Pháp Mahakala Trắng',
+      slug: 'tuong-ho-phap-mahakala-trang',
+      description: 'Tượng Mahakala Trắng (White Mahakala) — hóa thân từ bi của Đại Hắc Thiên. Khác với các tướng Mahakala khác, ngài hiện tướng hiền hòa với sắc trắng tinh khiết, tay cầm bảo châu và chày kim cương. Biểu tượng của tài lộc và che chở.',
+      price: 9342000,
+      images: JSON.stringify([IMG.whiteMahakala]),
+      dimensions: '15cm x 10cm',
+      weight: '0.8 kg',
+      material: 'Đồng mạ vàng',
+      categoryId: hoPhap.id,
+      featured: false,
+    },
+    {
+      name: 'Tượng Hộ Pháp Mahakala Sáu Tay',
+      slug: 'tuong-ho-phap-mahakala-sau-tay',
+      description: 'Tượng Mahakala sáu tay (Six-Armed Mahakala) — hộ pháp tối thượng của Mật Tông Tây Tạng. Mỗi tay cầm một pháp khí riêng: dao cong, xương chày, lasso, chày kim cương. Đứng trên xác người, tỏa hào quang lửa dữ dội.',
+      price: 40034000,
+      images: JSON.stringify([IMG.mahakala6]),
+      dimensions: '28cm x 20cm',
+      weight: '3.8 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: hoPhap.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Hộ Pháp Achala',
+      slug: 'tuong-ho-phap-achala',
+      description: 'Tượng Hộ Pháp Achala (Acalanatha) — vị hộ pháp bất động của Phật giáo Tây Tạng. Tay phải cầm kiếm trí tuệ chém vô minh, tay trái cầm thòng lọng trói buộc phiền não. Thân đen, mắt đỏ, phẫn nộ tướng uy mãnh. Đồng mạ vàng 24K chế tác thủ công.',
+      price: 32028000,
+      images: JSON.stringify([IMG.achala]),
+      dimensions: '25cm x 18cm',
+      weight: '3.2 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: hoPhap.id,
+      featured: false,
+    },
+    {
+      name: 'Tượng Hộ Pháp Chakrasamvara',
+      slug: 'tuong-ho-phap-chakrasamvara',
+      description: 'Tượng Chakrasamvara (Khorlo Demchog) — vị Mật Tông Yidam tối thượng của pháp môn Thời Luân. Đứng trong tư thế Yab-Yum với consort, biểu tượng của sự hợp nhất giữa đại lạc và tánh không. Đồng mạ vàng 24K, chạm khắc tinh xảo.',
+      price: 34696000,
+      images: JSON.stringify([IMG.chakrasamvara]),
+      dimensions: '27cm x 20cm',
+      weight: '3.5 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: hoPhap.id,
+      featured: false,
+    },
+    {
+      name: 'Tượng Hộ Pháp Hevajra Yab-Yum',
+      slug: 'tuong-ho-phap-hevajra-yab-yum',
+      description: 'Tượng Hevajra Yab-Yum — Mật Tông Yidam cao cấp nhất của phái Sakya. Mười sáu tay cầm đầy pháp khí biểu tượng, đứng trong tư thế hợp nhất với consort. Đồng mạ vàng 24K, chạm khắc thủ công tinh xảo từ Nepal.',
+      price: 58717000,
+      images: JSON.stringify([IMG.hevajra]),
+      dimensions: '32cm x 24cm',
+      weight: '5.6 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: hoPhap.id,
+      featured: true,
+    },
+    // ── Từ Tượng Lớn (đồ chuyển về Hộ Pháp) ──
+    {
+      name: 'Tượng Vajrakilaya Kích Thước Lớn',
+      slug: 'tuong-vajrakilaya-lon',
+      description: 'Tượng Vajrakilaya (Kim Cương Tương) — hộ pháp Mật Tông với thần thái uy mãnh. Ba mặt sáu tay, chế tác thủ công tinh xảo. Kích thước lớn phù hợp cho pháp đường và thiền viện.',
+      price: 45384000,
+      images: JSON.stringify([IMG.vajrakilayaFront, IMG.vajrakilayaSide, IMG.vajrakilayaCloseup]),
+      dimensions: '35.5cm x 24cm',
+      weight: '6.5 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: hoPhap.id,
+      featured: true,
+    },
+
+    // ═══════════════════════════════════════════
+    // ĐẠI SƯ (5 products)
+    // ═══════════════════════════════════════════
     {
       name: 'Tượng Liên Hoa Sinh Đại Sư Guru Rinpoche',
       slug: 'tuong-lien-hoa-sinh-dai-su',
@@ -258,7 +558,7 @@ async function main() {
       dimensions: '45cm x 32cm',
       weight: '7.8 kg',
       material: 'Đồng mạ vàng 24K',
-      categoryId: guru.id,
+      categoryId: daiSu.id,
       featured: true,
     },
     {
@@ -270,10 +570,49 @@ async function main() {
       dimensions: '35cm x 25cm',
       weight: '5.4 kg',
       material: 'Đồng mạ vàng 24K',
-      categoryId: guru.id,
+      categoryId: daiSu.id,
       featured: false,
     },
-    // ── Tượng Thần Tài (3 products) ──
+    {
+      name: 'Tượng Đại Sư Milarepa Cao Cấp',
+      slug: 'tuong-dai-su-milarepa-cao-cap',
+      description: 'Tượng Đại Sư Milarepa — vị thánh tăng vĩ đại nhất của Tây Tạng. Ngài ngồi trong tư thế thiền định với bàn tay phải đưa lên tai — tư thế "lắng nghe" huyền thoại. Chất liệu đồng mạ vàng 24K, chạm khắc chân dung tỉ mỉ. Biểu tượng của sự giác ngộ qua khổ hạnh.',
+      price: 45372000,
+      images: JSON.stringify([IMG.milarepa1]),
+      dimensions: '26cm x 18cm',
+      weight: '3.0 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: daiSu.id,
+      featured: true,
+    },
+    {
+      name: 'Tượng Đại Sư Milarepa Thiền Định',
+      slug: 'tuong-dai-su-milarepa-thien',
+      description: 'Tượng Milarepa thế ngồi thiền, tay phải đưa lên tai trong tư thế lắng nghe — ghi nhận khoảnh khắc ngài đạt giác ngộ. Đồng thủ công Nepal, lớp hoàn thiện oxidized cổ kính, khuôn mặt sơn vàng thủ công.',
+      price: 26690000,
+      images: JSON.stringify([IMG.milarepa2]),
+      dimensions: '20cm x 14cm',
+      weight: '2.2 kg',
+      material: 'Đồng oxidized, sơn vàng',
+      categoryId: daiSu.id,
+      featured: false,
+    },
+    {
+      name: 'Tượng Đại Sư Tsongkhapa',
+      slug: 'tuong-dai-su-tsongkhapa',
+      description: 'Tượng Đại Sư Tsongkhapa — tổ sư sáng lập phái Gelug (Mũ Vàng) của Phật giáo Tây Tạng. Ngài ngồi trên tòa sen, tay kết ấn thuyết pháp, đội mũ pandita đặc trưng. Đồng mạ vàng 24K, chạm khắc chân dung tinh tế — thích hợp cho hành giả phái Gelug.',
+      price: 37365000,
+      images: JSON.stringify([IMG.tsongkhapa]),
+      dimensions: '24cm x 16cm',
+      weight: '2.8 kg',
+      material: 'Đồng mạ vàng 24K',
+      categoryId: daiSu.id,
+      featured: false,
+    },
+
+    // ═══════════════════════════════════════════
+    // THẦN TÀI (6 products)
+    // ═══════════════════════════════════════════
     {
       name: 'Tượng Thần Tài Dzambhala Mạ Vàng 24K',
       slug: 'tuong-dzambhala-ma-vang',
@@ -310,102 +649,69 @@ async function main() {
       categoryId: thanTai.id,
       featured: false,
     },
-    // ── Tượng Kích Thước Lớn (3 products) ──
     {
-      name: 'Bộ Sưu Tập Ba Tượng Phật Mạ Vàng',
-      slug: 'bo-suu-tap-ba-tuong-phat-ma-vang',
-      description: 'Bộ ba tượng Phật mạ vàng 24K lửa: Phật Thích Ca, Phật A Di Đà và Phật Dược Sư. Mỗi tượng cao 21cm, chế tác thủ công tại Nepal. Bộ sưu tập hoàn hảo cho phòng thờ lớn.',
-      price: 80089000,
-      images: JSON.stringify([IMG.threeBuddha, IMG.largeCollection]),
-      dimensions: '21cm x 14cm (mỗi tượng)',
-      weight: '9.0 kg (cả bộ)',
+      name: 'Tượng Thần Tài Vasudhara',
+      slug: 'tuong-than-tai-vasudhara',
+      description: 'Tượng Thần Tài Vasudhara — nữ thần tài lộc trong Phật giáo Tây Tạng. Sáu tay cầm các biểu tượng: bảo châu, bông lúa, bình báu và kinh sách. Ngồi trên tòa sen, trang phục lộng lẫy. Cầu tài lộc và thịnh vượng.',
+      price: 32028000,
+      images: JSON.stringify([IMG.vasudhara]),
+      dimensions: '22cm x 15cm',
+      weight: '2.6 kg',
       material: 'Đồng mạ vàng 24K',
-      categoryId: lon.id,
-      featured: true,
+      categoryId: thanTai.id,
+      featured: false,
     },
     {
-      name: 'Tượng Vajrakilaya Kích Thước Lớn',
-      slug: 'tuong-vajrakilaya-lon',
-      description: 'Tượng Vajrakilaya (Kim Cương Tương) — hộ pháp Mật Tông với thần thái uy mãnh. Ba mặt sáu tay, chế tác thủ công tinh xảo. Kích thước lớn phù hợp cho pháp đường và thiền viện.',
-      price: 45384000,
-      images: JSON.stringify([IMG.vajrakilayaFront, IMG.vajrakilayaSide, IMG.vajrakilayaCloseup]),
-      dimensions: '35.5cm x 24cm',
-      weight: '6.5 kg',
-      material: 'Đồng mạ vàng 24K',
-      categoryId: lon.id,
-      featured: true,
-    },
-    {
-      name: 'Tượng Kim Cương Thủ Vajrapani Cao 61cm',
-      slug: 'tuong-kim-cuong-thu-61cm',
-      description: 'Tượng Kim Cương Thủ Bồ Tát (Vajrapani) kích thước lớn 61.5cm. Chế tác từ đồng nguyên chất đặc, tay cầm chày kim cương và thòng lọng. Uy lực và oai nghiêm, phù hợp cho chánh điện.',
-      price: 160107000,
-      images: JSON.stringify([IMG.vajrapaniGold, IMG.f3Vajrapani]),
-      dimensions: '61.5cm x 46.5cm',
-      weight: '12 kg',
+      name: 'Tượng Ganesha Đồng Cao Cấp',
+      slug: 'tuong-ganesha-dong-cao-cap',
+      description: 'Tượng Ganesha — vị thần đầu voi phổ biến trong cả Ấn Độ giáo và Phật giáo Tây Tạng. Ngài là vị thần khai mở trí tuệ, xóa bỏ chướng ngại. Tay phải cầm rìu, tay trái cầm dây thòng lọng, ngà voi gãy. Đồng chế tác thủ công Nepal.',
+      price: 48041000,
+      images: JSON.stringify([IMG.ganesha]),
+      dimensions: '28cm x 18cm',
+      weight: '3.8 kg',
       material: 'Đồng nguyên chất',
-      categoryId: lon.id,
-      featured: false,
-    },
-    // ── Pháp Khí (3 products) ──
-    {
-      name: 'Chuông Kim Cương Nepal (Ghanta) Cao Cấp',
-      slug: 'chuong-kim-cuong-nepal-ghanta',
-      description: 'Chuông Kim Cương (Ghanta) Nepal — pháp khí quan trọng trong nghi lễ Mật Tông. Chế tác từ hợp kim 7 loại kim loại, âm thanh trong trẻo vang xa. Tay cầm hình chày kim cương.',
-      price: 2400000,
-      images: JSON.stringify([IMG.bellGhanta]),
-      dimensions: '18cm x 8cm',
-      weight: '0.5 kg',
-      material: 'Hợp kim 7 kim loại',
-      categoryId: phapKhi.id,
+      categoryId: thanTai.id,
       featured: false,
     },
     {
-      name: 'Chày Kim Cương (Vajra) 5 Xẻ — Đồng Mạ Vàng',
-      slug: 'chay-kim-cuong-vajra-5-xe',
-      description: 'Chày Kim Cương (Vajra/Dorje) 5 xẻ — pháp khí tối thượng của Mật Tông. Đồng mạ vàng 24K, chạm khắc tinh xảo với mặt Makara. Sử dụng trong các nghi lễ thiền định và cúng dường.',
-      price: 1800000,
-      images: JSON.stringify([IMG.bellGhanta]),
-      dimensions: '12cm x 4cm',
-      weight: '0.3 kg',
+      name: 'Tượng Ganesha Bốn Tay',
+      slug: 'tuong-ganesha-bon-tay',
+      description: 'Tượng Ganesha bốn tay ngồi trên tòa sen — hai tay chính cầm rìu và thòng lọng, hai tay phụ kết ấn. Vòi voi uốn cong, thân hình tròn đầy. Mạ vàng 24K, chạm khắc tinh xảo.',
+      price: 37365000,
+      images: JSON.stringify([IMG.ganesha4arm]),
+      dimensions: '24cm x 16cm',
+      weight: '3.0 kg',
       material: 'Đồng mạ vàng 24K',
-      categoryId: phapKhi.id,
+      categoryId: thanTai.id,
       featured: false,
     },
+
+    // ═══════════════════════════════════════════
+    // LINH VẬT (2 products)
+    // ═══════════════════════════════════════════
     {
-      name: 'Bộ Pháp Khí Chuông & Chày Kim Cương Mạ Vàng',
-      slug: 'bo-phap-khi-chuong-chay-kim-cuong',
-      description: 'Bộ pháp khí hoàn chỉnh gồm Chuông Kim Cương (Ghanta) và Chày Kim Cương (Vajra) 5 xẻ. Đồng mạ vàng 24K, chế tác thủ công. Hộp đựng gỗ sang trọng kèm theo.',
-      price: 3800000,
-      images: JSON.stringify([IMG.bellGhanta, IMG.phapKhi]),
-      dimensions: '18cm x 8cm / 12cm x 4cm',
-      weight: '0.8 kg (cả bộ)',
-      material: 'Đồng mạ vàng 24K',
-      categoryId: phapKhi.id,
+      name: 'Tượng Kim Sí Điểu (Garuda) Đồng',
+      slug: 'tuong-kim-si-dieu-garuda',
+      description: 'Tượng Kim Sí Điểu (Garuda) — thần điểu hộ pháp trong Phật giáo Tây Tạng. Đầu và cánh đại bàng, thân người, tay cầm rắn rồng — biểu tượng của sức mạnh chế ngự phiền não. Đồng chế tác thủ công, thích hợp treo cao hoặc đặt bàn thờ Hộ Pháp.',
+      price: 24021000,
+      images: JSON.stringify([IMG.garuda]),
+      dimensions: '20cm x 18cm',
+      weight: '1.8 kg',
+      material: 'Đồng nguyên chất',
+      categoryId: hoPhap.id,
       featured: true,
     },
-    // ── Tranh Thangka (2 products) ──
     {
-      name: 'Tranh Thangka Phật Thích Ca Vẽ Tay',
-      slug: 'tranh-thangka-phat-thich-ca',
-      description: 'Tranh Thangka Phật Thích Ca vẽ tay trên vải bố, sử dụng màu tự nhiên từ khoáng chất. Khung thêu gấm Tây Tạng truyền thống. Phù hợp treo phòng thờ, phòng thiền hoặc làm quà tặng tâm linh.',
-      price: 5500000,
-      images: JSON.stringify([IMG.thangkaImg]),
-      dimensions: '60cm x 45cm',
-      material: 'Vải bố, màu khoáng tự nhiên',
-      categoryId: thangka.id,
+      name: 'Tượng Kim Sí Điểu Mạ Vàng Nhỏ',
+      slug: 'tuong-kim-si-dieu-ma-vang-nho',
+      description: 'Tượng Kim Sí Điểu (Garuda) mạ vàng nhỏ xinh — thần điểu hộ pháp, tượng trưng cho sức mạnh và sự bảo hộ. Phù hợp đặt trên bàn thờ hoặc treo xe hơi. Chế tác thủ công tại Nepal.',
+      price: 13345000,
+      images: JSON.stringify([IMG.garudaGold]),
+      dimensions: '12cm x 10cm',
+      weight: '0.6 kg',
+      material: 'Đồng mạ vàng',
+      categoryId: hoPhap.id,
       featured: false,
-    },
-    {
-      name: 'Tranh Thangka Tara Xanh Cao Cấp',
-      slug: 'tranh-thangka-tara-xanh',
-      description: 'Tranh Thangka Tara Xanh (Green Tara) vẽ tay tỉ mỉ. Màu sắc rực rỡ, đường nét tinh tế. Viền thêu gấm Tây Tạng cao cấp. Có trục gỗ để cuộn bảo quản.',
-      price: 7200000,
-      images: JSON.stringify([IMG.thangkaImg, IMG.taraColl]),
-      dimensions: '75cm x 55cm',
-      material: 'Vải bố, màu khoáng tự nhiên',
-      categoryId: thangka.id,
-      featured: true,
     },
   ]
 
@@ -499,10 +805,10 @@ async function main() {
   // ── Summary ──
   console.log('')
   console.log('✅ Seed completed successfully!')
-  console.log(`   📂 Categories: ${cats.length}`)
+  console.log(`   📂 Categories: ${cats.length} (Phật, Bồ Tát, Phật Mẫu, Hộ Pháp, Đại Sư, Thần Tài)`)
   console.log(`   📦 Products: ${products.length}`)
   console.log(`   📝 Blog posts: ${blogPosts.length}`)
-  console.log(`   All image URLs verified from nidhiratna.com CDN`)
+  console.log(`   ❌ Removed: Pháp Khí (7), Tranh Thangka (2), Tượng Lớn (category)`)
   console.log(`   ✅ Idempotent — safe to re-run`)
 }
 

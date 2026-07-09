@@ -10,12 +10,12 @@ import type { Product } from "@/types"
 export const dynamic = "force-dynamic"
 
 const COLLECTION_SECTIONS = [
-  { slug: "tuong-phat", heading: "Buddha", full: "Buddha Collections", desc: "Tượng Phật Thích Ca, A Di Đà, Dược Sư — tinh hoa điêu khắc Phật giáo Nepal" },
-  { slug: "tuong-bo-tat", heading: "Bodhisattva", full: "Bodhisattva Collections", desc: "Tượng Vajrapani, Quán Thế Âm, Văn Thù — từ bi và trí tuệ" },
-  { slug: "tuong-tara", heading: "Tara", full: "Tara Collections", desc: "Tara Xanh, Tara Trắng, Tara Đỏ — Phật Mẫu cứu khổ cứu nạn" },
-  { slug: "tuong-dakini", heading: "Dakini", full: "Dakini Collections", desc: "Troma Nagmo và các hóa thân Dakini Mật Tông uy mãnh" },
-  { slug: "tuong-guru", heading: "Guru", full: "Guru Collections", desc: "Guru Rinpoche — Liên Hoa Sinh Đại Sư, tổ sư Mật Tông" },
-  { slug: "tuong-than-tai", heading: "Wealth Deity", full: "Wealth Deity Collections", desc: "Dzambhala và Thần Tài Phật giáo — tài lộc và thịnh vượng" },
+  { slug: "phat", heading: "Phật", full: "Buddha Collections", desc: "Phật Thích Ca, Di Lặc, A Di Đà, Dược Sư — tinh hoa điêu khắc Phật giáo Nepal" },
+  { slug: "bo-tat", heading: "Bồ Tát", full: "Bodhisattva Collections", desc: "Tượng Quán Thế Âm, Văn Thù, Địa Tạng — từ bi và trí tuệ" },
+  { slug: "phat-mau", heading: "Phật Mẫu", full: "Mother Buddha Collections", desc: "Tara Xanh, Tara Trắng, Tara Đỏ — Phật Mẫu cứu khổ cứu nạn" },
+  { slug: "ho-phap", heading: "Hộ Pháp", full: "Protector Collections", desc: "Mahakala, Chakrasamvara, Hevajra — các vị hộ pháp uy mãnh" },
+  { slug: "dai-su", heading: "Đại Sư", full: "Master Collections", desc: "Guru Rinpoche, Milarepa, Tsongkhapa — các bậc Đại Thành Tựu" },
+  { slug: "than-tai", heading: "Thần Tài", full: "Wealth Deity Collections", desc: "Dzambhala, Vasudhara, Ganesha — tài lộc và thịnh vượng" },
 ]
 
 export default async function HomePage() {
@@ -28,12 +28,6 @@ export default async function HomePage() {
         prisma.product.findMany({ where: { category: { slug: col.slug } }, include: { category: true }, take: 12 })
       ),
     ])
-
-  const ritualItems = await prisma.product.findMany({
-    where: { category: { slug: "phap-khi" } },
-    include: { category: true },
-    take: 10,
-  })
 
   return (
     <>
@@ -53,12 +47,12 @@ export default async function HomePage() {
               </h2>
               <div className="w-12 h-0.5 bg-[#b8860b] mx-auto mt-3 rounded-full" />
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-5 sm:gap-6 md:gap-8">
               {allCats.map((cat) => (
                 <Link
                   key={cat.id}
                   href={`/danh-muc/${cat.slug}`}
-                  className="group relative block aspect-[3/4] rounded-xl overflow-hidden bg-gray-800"
+                  className="group relative block aspect-[3/4] md:aspect-[4/5] rounded-xl overflow-hidden bg-gray-800"
                 >
                   <img
                     src={cat.image!}
@@ -143,31 +137,6 @@ export default async function HomePage() {
                 Xem Tất Cả <ChevronRight className="w-4 h-4" />
               </Link>
             </div>
-          </div>
-        </section>
-      )}
-
-      {/* ═══ RITUAL COLLECTION ═══ */}
-      {ritualItems.length > 0 && (
-        <section className="py-10 sm:py-14 bg-[#0b1120]">
-          <div className="container-page">
-            <div className="text-center mb-8">
-              <p className="text-[#b8860b] text-xs sm:text-sm uppercase tracking-[0.2em] font-medium">
-                Sacred Tools
-              </p>
-              <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mt-2">
-                Ritual <span className="text-[#b8860b]">Collection</span>
-              </h2>
-              <p className="text-gray-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">
-                Chuông, chày kim cương và các pháp khí Mật Tông nhập khẩu trực tiếp từ Nepal
-              </p>
-              <div className="w-12 h-0.5 bg-[#b8860b] mx-auto mt-3 rounded-full" />
-            </div>
-            <CollectionSection
-              title=""
-              viewAllHref="/danh-muc/phap-khi"
-              products={ritualItems}
-            />
           </div>
         </section>
       )}

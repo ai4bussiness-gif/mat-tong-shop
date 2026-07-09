@@ -20,7 +20,7 @@ export default function NotFound() {
             Về Trang Chủ
           </Link>
           <Link
-            href="/danh-muc/tuong-phat"
+            href="/danh-muc/phat"
             className="inline-flex items-center px-6 py-3 border border-gray-700 text-gray-300 text-sm font-medium rounded-lg hover:border-[#b8860b]/30 hover:text-white transition-colors"
           >
             Khám Phá Sản Phẩm
@@ -28,11 +28,11 @@ export default function NotFound() {
         </div>
         <div className="mt-12 grid grid-cols-3 gap-3">
           {[
-            { href: '/danh-muc/tuong-phat', label: 'Tượng Phật' },
-            { href: '/danh-muc/tuong-bo-tat', label: 'Bồ Tát' },
-            { href: '/danh-muc/tuong-tara', label: 'Tara' },
-            { href: '/danh-muc/tuong-than-tai', label: 'Thần Tài' },
-            { href: '/danh-muc/phap-khi', label: 'Pháp Khí' },
+            { href: '/danh-muc/phat', label: 'Phật' },
+            { href: '/danh-muc/bo-tat', label: 'Bồ Tát' },
+            { href: '/danh-muc/phat-mau', label: 'Phật Mẫu' },
+            { href: '/danh-muc/than-tai', label: 'Thần Tài' },
+            { href: '/danh-muc/ho-phap', label: 'Hộ Pháp' },
             { href: '/lien-he', label: 'Liên Hệ' },
           ].map((item) => (
             <Link

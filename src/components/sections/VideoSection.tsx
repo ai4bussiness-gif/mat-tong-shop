@@ -10,10 +10,10 @@ export function VideoSection() {
         muted
         loop
         playsInline
-        poster="https://nidhiratna.com/cdn/shop/files/preview_images/998756c0488a47149b677dce72f49e96.thumbnail.0000000000.jpg"
+        poster="https://res.cloudinary.com/zgl5avbd/image/upload/v1/mat-tong/video-poster.jpg"
       >
         <source
-          src="https://nidhiratna.com/cdn/shop/videos/c/vp/998756c0488a47149b677dce72f49e96/998756c0488a47149b677dce72f49e96.HD-1080p-4.8Mbps-45620052.mp4"
+          src="https://res.cloudinary.com/zgl5avbd/video/upload/v1/mat-tong/promo-video.mp4"
           type="video/mp4"
         />
       </video>

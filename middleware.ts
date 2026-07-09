@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { verifyToken, getAuthCookieName } from './src/lib/auth'
+import { verifyToken, getAuthCookieName } from './src/lib/admin-auth'
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl

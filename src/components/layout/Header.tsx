@@ -88,6 +88,12 @@ export function Header() {
             >
               Liên Hệ
             </Link>
+            <Link
+              href="/don-hang"
+              className="px-4 py-2.5 text-[15px] font-medium text-gray-300 hover:text-white hover:bg-white/5 transition-colors rounded-lg"
+            >
+              Đơn Hàng
+            </Link>
           </nav>
 
           {/* Right icons */}
@@ -193,6 +199,13 @@ export function Header() {
                   onClick={() => setMenuOpen(false)}
                 >
                   Bài Viết
+                </Link>
+                <Link
+                  href="/don-hang"
+                  className="block px-3 py-2.5 text-sm font-medium text-gray-300 hover:text-white rounded-lg hover:bg-white/5 transition-colors"
+                  onClick={() => setMenuOpen(false)}
+                >
+                  Đơn Hàng
                 </Link>
                 <Link
                   href="/admin"

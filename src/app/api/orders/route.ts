@@ -9,7 +9,7 @@ export async function GET() {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json()
-    const { items, total, name, email, phone, address, note, paymentMethod } = body
+    const { items, total, name, email, phone, address, note, paymentMethod, userId } = body
 
     if (!items?.length || !name || !email || !phone || !address) {
       return NextResponse.json({ error: "Thiếu thông tin bắt buộc" }, { status: 400 })
@@ -27,6 +27,7 @@ export async function POST(req: NextRequest) {
         paymentMethod: paymentMethod || "bank_transfer",
         status: "pending",
         paid: false,
+        ...(userId && { userId: parseInt(userId) }),
       },
     })
 

@@ -30,7 +30,24 @@ export async function POST(req: NextRequest) {
       },
     })
 
-    return NextResponse.json({ order, success: true })
+    // Tạo mã đơn hàng: MT-YYMMDD-XXXX
+    const now = new Date()
+    const dd = String(now.getDate()).padStart(2, '0')
+    const mm = String(now.getMonth() + 1).padStart(2, '0')
+    const yy = String(now.getFullYear()).slice(-2)
+    const seq = String(order.id).padStart(4, '0')
+    const orderCode = `MT-${yy}${mm}${dd}-${seq}`
+    const transferContent = `CKMT${yy}${mm}${dd}${seq}`
+
+    await prisma.order.update({
+      where: { id: order.id },
+      data: { orderCode, transferContent },
+    })
+
+    return NextResponse.json({
+      order: { ...order, orderCode, transferContent },
+      success: true,
+    })
   } catch (error) {
     console.error(error)
     return NextResponse.json({ error: "Lỗi server" }, { status: 500 })

@@ -65,6 +65,9 @@ export default function ProductDetailPage() {
       price: product.price,
       image: images[0],
       slug: product.slug,
+      dimensions: product.dimensions || undefined,
+      material: product.material || undefined,
+      weight: product.weight || undefined,
     })
     setAdded(true)
     setTimeout(() => setAdded(false), 2000)

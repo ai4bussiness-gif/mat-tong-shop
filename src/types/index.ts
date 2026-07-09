@@ -26,6 +26,8 @@ export type Category = {
 
 export type Order = {
   id: number
+  orderCode: string | null
+  transferContent: string | null
   items: string
   total: number
   customerName: string

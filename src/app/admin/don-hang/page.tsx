@@ -49,7 +49,10 @@ export default function AdminOrdersPage() {
             <div key={order.id} className="bg-[#0f172a] border border-gray-800 rounded-xl p-5">
               <div className="flex items-start justify-between mb-3 flex-wrap gap-2">
                 <div>
-                  <p className="font-semibold text-white">#{order.id} — {order.customerName}</p>
+                  <p className="font-semibold text-white">
+                    {order.orderCode || `#${order.id}`}
+                    <span className="text-sm font-normal text-gray-400 ml-2">— {order.customerName}</span>
+                  </p>
                   <p className="text-sm text-gray-400">{order.customerPhone} | {order.customerEmail}</p>
                   <p className="text-sm text-gray-500">{order.customerAddress}</p>
                 </div>
@@ -102,15 +105,30 @@ export default function AdminOrdersPage() {
                 </div>
               )}
 
+              {order.transferContent && (
+                <div className="mt-2 text-xs text-gray-400 bg-[#1a2236] p-2 rounded-lg">
+                  Nội dung CK: <span className="text-[#b8860b] font-mono">{order.transferContent}</span>
+                </div>
+              )}
+
               <details className="mt-3">
                 <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-300 transition-colors">
                   Chi tiết sản phẩm ({JSON.parse(order.items).length} món)
                 </summary>
-                <div className="mt-2 space-y-1.5 bg-[#1a2236] rounded-lg p-3">
+                <div className="mt-2 space-y-2 bg-[#1a2236] rounded-lg p-3">
                   {JSON.parse(order.items).map((item: any, i: number) => (
-                    <div key={i} className="flex items-center justify-between text-sm">
-                      <span className="text-gray-300">{item.name} × {item.quantity}</span>
-                      <span className="text-[#b8860b] font-medium">{formatPrice(item.price * item.quantity)}</span>
+                    <div key={i} className="border-b border-gray-700/50 last:border-0 pb-2 last:pb-0">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-gray-300">{item.name} × {item.quantity}</span>
+                        <span className="text-[#b8860b] font-medium">{formatPrice(item.price * item.quantity)}</span>
+                      </div>
+                      {(item.dimensions || item.material || item.weight) && (
+                        <div className="flex gap-3 mt-1 text-xs text-gray-500">
+                          {item.dimensions && <span>📏 {item.dimensions}</span>}
+                          {item.material && <span>🧱 {item.material}</span>}
+                          {item.weight && <span>⚖️ {item.weight}</span>}
+                        </div>
+                      )}
                     </div>
                   ))}
                 </div>

@@ -16,6 +16,8 @@ export default function CheckoutPage() {
   const [submitting, setSubmitting] = useState(false)
   const [done, setDone] = useState(false)
   const [orderId, setOrderId] = useState<number | null>(null)
+  const [orderCode, setOrderCode] = useState<string | null>(null)
+  const [transferContent, setTransferContent] = useState<string | null>(null)
 
   const validate = () => {
     const errs: Record<string, string> = {}
@@ -53,6 +55,8 @@ export default function CheckoutPage() {
 
       if (res.ok) {
         setOrderId(data.order?.id || null)
+        setOrderCode(data.order?.orderCode || null)
+        setTransferContent(data.order?.transferContent || null)
         setDone(true)
         clearCart()
       } else {
@@ -80,9 +84,9 @@ export default function CheckoutPage() {
             <Check className="w-10 h-10 text-green-400" />
           </div>
           <h1 className="text-2xl sm:text-3xl font-bold text-white mb-2">Đặt Hàng Thành Công!</h1>
-          {orderId && (
-            <p className="text-[#b8860b] font-semibold text-lg mb-2">
-              Mã đơn hàng: <span className="text-white">#{orderId}</span>
+          {orderCode && (
+            <p className="text-[#b8860b] font-semibold text-lg mb-1">
+              Mã đơn hàng: <span className="text-white">{orderCode}</span>
             </p>
           )}
           <p className="text-gray-400 mb-6 max-w-md mx-auto">
@@ -96,7 +100,7 @@ export default function CheckoutPage() {
                   { label: 'Ngân hàng', value: 'VietinBank' },
                   { label: 'Số tài khoản', value: '108865812222' },
                   { label: 'Chủ tài khoản', value: 'Mật Tông' },
-                  { label: 'Nội dung CK', value: orderId ? `MT${orderId}` : 'Mật Tông Shop' },
+                  { label: 'Nội dung CK', value: transferContent || (orderId ? `CKMT${orderId}` : 'Mật Tông Shop') },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center justify-between py-1.5 border-b border-gray-800 last:border-0">
                     <span className="text-gray-400">{item.label}</span>

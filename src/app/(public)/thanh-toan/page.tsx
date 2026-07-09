@@ -128,6 +128,7 @@ export default function CheckoutPage() {
             Chúng tôi sẽ liên hệ với bạn qua số điện thoại hoặc email trong thời gian sớm nhất.
           </p>
           {paymentMethod === 'bank_transfer' && (
+            <>
             <div className="max-w-md mx-auto bg-[#0f172a] border border-gray-800 rounded-xl p-5 mb-6 text-left">
               <h3 className="text-white font-semibold text-sm mb-3">Thông tin chuyển khoản:</h3>
               <div className="space-y-2 text-sm">
@@ -185,6 +186,7 @@ export default function CheckoutPage() {
                 </label>
               )}
             </div>
+            </>
           )}
           <Link
             href="/"

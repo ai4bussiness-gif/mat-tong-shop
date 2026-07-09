@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/db"
 
-function getCloudinarySignature(params: Record<string, string>, apiSecret: string): string {
+async function getCloudinarySignature(params: Record<string, string>, apiSecret: string): Promise<string> {
   // Sort params by key, join as key=value&key=value, append api_secret, then SHA1
   const sorted = Object.keys(params)
     .sort()
@@ -11,9 +11,8 @@ function getCloudinarySignature(params: Record<string, string>, apiSecret: strin
 
   // Use Web Crypto API for SHA1 (works in Edge Runtime too)
   const encoder = new TextEncoder()
-  return crypto.subtle
-    .digest("SHA-1", encoder.encode(toSign))
-    .then((buf) => Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join(""))
+  const buf = await crypto.subtle.digest("SHA-1", encoder.encode(toSign))
+  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("")
 }
 
 export async function POST(req: NextRequest) {

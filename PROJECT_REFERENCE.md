@@ -159,6 +159,7 @@ mat-tong-shop/
 | 2026-07-09 | Đổi logo text → ảnh logo crop 300×80, height 48px | `src/components/layout/Header.tsx` |
 | 2026-07-09 | Thêm favicon từ Cloudinary | `src/app/layout.tsx` |
 | 2026-07-09 | Update metadata title + description | `src/app/layout.tsx` |
+| 2026-07-09 | Bỏ "Explore our" + "Collections" khỏi heading section — giữ thuần tên danh mục | `src/app/(public)/page.tsx` |
 
 ---
 

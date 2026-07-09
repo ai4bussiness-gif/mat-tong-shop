@@ -10,12 +10,12 @@ import type { Product } from "@/types"
 export const dynamic = "force-dynamic"
 
 const COLLECTION_SECTIONS = [
-  { slug: "phat", heading: "Phật", full: "Buddha Collections", desc: "Phật Thích Ca, Di Lặc, A Di Đà, Dược Sư — tinh hoa điêu khắc Phật giáo Nepal" },
-  { slug: "bo-tat", heading: "Bồ Tát", full: "Bodhisattva Collections", desc: "Tượng Quán Thế Âm, Văn Thù, Địa Tạng — từ bi và trí tuệ" },
-  { slug: "phat-mau", heading: "Phật Mẫu", full: "Mother Buddha Collections", desc: "Tara Xanh, Tara Trắng, Tara Đỏ — Phật Mẫu cứu khổ cứu nạn" },
-  { slug: "ho-phap", heading: "Hộ Pháp", full: "Protector Collections", desc: "Mahakala, Chakrasamvara, Hevajra — các vị hộ pháp uy mãnh" },
-  { slug: "dai-su", heading: "Đại Sư", full: "Master Collections", desc: "Guru Rinpoche, Milarepa, Tsongkhapa — các bậc Đại Thành Tựu" },
-  { slug: "than-tai", heading: "Thần Tài", full: "Wealth Deity Collections", desc: "Dzambhala, Vasudhara, Ganesha — tài lộc và thịnh vượng" },
+  { slug: "phat", heading: "Chư Phật", desc: "Phật Thích Ca, Di Lặc, A Di Đà, Dược Sư — tinh hoa điêu khắc Phật giáo Nepal" },
+  { slug: "bo-tat", heading: "Chư Bồ Tát", desc: "Tượng Quán Thế Âm, Văn Thù, Địa Tạng — từ bi và trí tuệ" },
+  { slug: "phat-mau", heading: "Chư Phật Mẫu", desc: "Tara Xanh, Tara Trắng, Tara Đỏ — Phật Mẫu cứu khổ cứu nạn" },
+  { slug: "ho-phap", heading: "Chư Hộ Pháp", desc: "Mahakala, Chakrasamvara, Hevajra — các vị hộ pháp uy mãnh" },
+  { slug: "dai-su", heading: "Chư Đại Sư", desc: "Guru Rinpoche, Milarepa, Tsongkhapa — các bậc Đại Thành Tựu" },
+  { slug: "than-tai", heading: "Chư Thần Tài", desc: "Dzambhala, Vasudhara, Ganesha — tài lộc và thịnh vượng" },
 ]
 
 export default async function HomePage() {
@@ -88,7 +88,8 @@ export default async function HomePage() {
             <div className="container-page">
               <div className="text-center mb-8">
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mt-2">
-                  <span className="text-[#b8860b]">{col.heading}</span>
+                  <span className="text-gray-300 font-medium">{col.heading.split(' ')[0]} </span>
+                  <span className="text-[#b8860b]">{col.heading.split(' ').slice(1).join(' ')}</span>
                 </h2>
                 <p className="text-gray-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">
                   {col.desc}

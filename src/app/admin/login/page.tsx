@@ -48,7 +48,7 @@ export default function AdminLoginPage() {
               <img
                 src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
                 alt="Mật Tông"
-                className="logo-gold logo-glow"
+                className="logo-gold"
                 style={{ height: '48px', maxWidth: 'none' }}
               />
             </div>

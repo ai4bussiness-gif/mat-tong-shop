@@ -39,7 +39,7 @@ export function Footer() {
               <img
                 src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
                 alt="Mật Tông"
-                className="logo-gold logo-glow"
+                className="logo-gold"
                 style={{ height: '42px', maxWidth: 'none' }}
               />
             </div>

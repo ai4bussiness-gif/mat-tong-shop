@@ -40,9 +40,12 @@ export function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <span className="text-xl sm:text-2xl font-bold tracking-wider text-white">
-              MẬT <span className="text-[#b8860b]">TÔNG</span>
-            </span>
+            <img
+              src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+              alt="Mật Tông"
+              className="w-auto max-w-full"
+              style={{ height: '48px' }}
+            />
           </Link>
 
           {/* Desktop nav */}

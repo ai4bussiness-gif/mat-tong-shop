@@ -28,7 +28,7 @@ mat-tong-shop/
 ├── package.json
 ├── prisma/
 │   ├── schema.prisma          # Category, Product, Order, BlogPost, Contact
-│   └── seed.ts                # 9 danh mục, 27 sản phẩm, 3 bài viết
+│   └── seed.ts                # 6 danh mục, 48 sản phẩm, 3 bài viết (Cloudinary)
 └── src/
     ├── app/
     │   ├── layout.tsx         # Root layout (body: bg #030712, text #e2e8f0)
@@ -149,6 +149,13 @@ mat-tong-shop/
 | — | ShareButton Web Share API | `ShareButton.tsx`, `san-pham/[slug]/page.tsx` |
 | — | Increase contrast (bg #030712) | `layout.tsx`, `globals.css` |
 | — | Add 6 testimonials (total 18) | `TestimonialSection.tsx` |
+| 2026-07-09 | Thêm 30+ sản phẩm (total 57), 4 categories mới | `prisma/seed.ts` |
+| 2026-07-09 | Upload 68 ảnh lên Cloudinary `zgl5avbd` | `scripts/`, `prisma/seed.ts`, `.env` |
+| 2026-07-09 | Fix gen_remove — AI xoá nhầm tượng, bỏ transformation | `prisma/seed.ts` |
+| 2026-07-09 | Upload hero banner + video poster lên Cloudinary | `HeroSlider.tsx`, `VideoSection.tsx` |
+| 2026-07-09 | **Tái cấu trúc danh mục: 13 → 6** — bỏ Thangka, Pháp Khí, Tượng Lớn, Linh Vật; gộp Di Lặc→Phật, Dakini→Phật Mẫu, Guru→Đại Sư; chuyển Garuda→Hộ Pháp | `prisma/seed.ts`, `src/lib/constants.ts`, `src/app/(public)/page.tsx`, `src/app/not-found.tsx`, `src/components/ui/HeroSlider.tsx`, `src/components/sections/HomeSections.tsx` |
+| 2026-07-09 | Grid danh mục: 2 hàng × 3 cột desktop, ảnh to hơn `aspect-[4/5]` | `src/app/(public)/page.tsx` |
+| 2026-07-09 | Push code + re-seed DB Neon (48 products) | GitHub master |
 
 ---
 

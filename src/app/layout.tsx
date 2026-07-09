@@ -8,9 +8,13 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Mật Tông — Tượng Phật Thủ Công & Vật Phẩm Mật Tông",
+  title: "Mật Tông — Tượng Phật Thủ Công Mật Tông",
   description:
-    "Chuyên tượng Phật Mật Tông thủ công nhập khẩu Nepal, Tây Tạng. Tượng đồng, pháp khí, tranh Thangka, linh phẩm chính gốc.",
+    "Chuyên tượng Phật Mật Tông thủ công nhập khẩu Nepal, Tây Tạng. Tượng đồng mạ vàng 24K, linh phẩm Phật giáo chính gốc.",
+  icons: {
+    icon: "https://res.cloudinary.com/zgl5avbd/image/upload/v1783574994/mat-tong/favicon.png",
+    apple: "https://res.cloudinary.com/zgl5avbd/image/upload/v1783574994/mat-tong/favicon.png",
+  },
 }
 
 export default function RootLayout({

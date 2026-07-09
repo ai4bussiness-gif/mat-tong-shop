@@ -72,7 +72,7 @@ export default async function AdminDashboardPage() {
     <div className="space-y-6">
       <div>
         <h1 className="text-xl font-bold text-white">Tổng quan</h1>
-        <p className="text-sm text-gray-400 mt-1">Dashboard quản trị Mật Tông</p>
+        <p className="text-sm text-gray-400 mt-1">Dashboard quản trị Tượng Mật Tông</p>
       </div>
 
       {/* Stats cards */}

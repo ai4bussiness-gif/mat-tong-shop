@@ -30,7 +30,7 @@ export default function ChatWidget() {
         <div className="fixed bottom-24 right-6 z-50 w-80 sm:w-96 bg-[#0f172a] border border-gray-700 rounded-2xl shadow-2xl shadow-black/40 overflow-hidden animate-in slide-in-from-bottom-4">
           {/* Header */}
           <div className="bg-gradient-to-r from-[#b8860b] to-[#d4a017] p-4">
-            <p className="text-white font-semibold text-sm">Mật Tông</p>
+            <p className="text-white font-semibold text-sm">Tượng Mật Tông</p>
             <p className="text-white/80 text-xs mt-0.5">Hỗ trợ khách hàng</p>
           </div>
 

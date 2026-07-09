@@ -11,9 +11,14 @@ export function CartDrawer() {
   const { items, removeItem, updateQuantity, getTotal } = useCartStore()
 
   useEffect(() => {
-    const handler = () => setOpen(true)
-    document.body.addEventListener('open-cart', handler)
-    return () => document.body.removeEventListener('open-cart', handler)
+    const openHandler = () => setOpen(true)
+    const toggleHandler = () => setOpen((prev) => !prev)
+    document.body.addEventListener('open-cart', openHandler)
+    document.body.addEventListener('toggle-cart', toggleHandler)
+    return () => {
+      document.body.removeEventListener('open-cart', openHandler)
+      document.body.removeEventListener('toggle-cart', toggleHandler)
+    }
   }, [])
 
   useEffect(() => {

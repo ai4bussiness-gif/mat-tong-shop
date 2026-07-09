@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
 import { Menu, Search, User, ShoppingBag, X, ChevronDown } from "lucide-react"
 import { useCartStore } from "@/lib/store"
 import { categories } from "@/lib/constants"
@@ -14,7 +13,6 @@ export function Header() {
   const [searchQuery, setSearchQuery] = useState("")
   const [mounted, setMounted] = useState(false)
   const itemCount = useCartStore((s) => s.getItemCount())
-  const router = useRouter()
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -23,6 +21,10 @@ export function Header() {
     if (searchQuery.trim()) {
       window.location.href = `/tim-kiem?q=${encodeURIComponent(searchQuery.trim())}`
     }
+  }
+
+  const toggleCart = () => {
+    document.body.dispatchEvent(new CustomEvent('toggle-cart'))
   }
 
   return (
@@ -101,7 +103,7 @@ export function Header() {
               <User className="w-5 h-5" />
             </Link>
             <button
-              onClick={() => router.push('/gio-hang')}
+              onClick={toggleCart}
               className="p-2 text-gray-300 hover:text-white transition-colors relative"
               aria-label="Cart"
             >

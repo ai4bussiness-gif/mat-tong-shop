@@ -34,9 +34,14 @@ export function Footer() {
       <div className="container-page py-12 sm:py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12">
         {/* Brand */}
         <div>
-          <h3 className="text-white text-2xl font-bold tracking-wider mb-5">
-            MẬT <span className="text-[#b8860b]">TÔNG</span>
-          </h3>
+          <Link href="/" className="inline-block">
+            <img
+              src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+              alt="Mật Tông"
+              className="logo-gold"
+              style={{ height: '42px' }}
+            />
+          </Link>
           <p className="text-sm text-gray-400 leading-relaxed mb-6">
             Chuyên tượng Phật Mật Tông thủ công nhập khẩu Nepal, Tây Tạng. Tượng đồng, pháp khí, tranh Thangka, linh phẩm chính gốc.
           </p>

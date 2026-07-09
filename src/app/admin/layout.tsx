@@ -46,11 +46,16 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       >
         <div className="w-60">
           {/* Logo */}
-          <div className="h-14 flex items-center px-4 border-b border-gray-800">
-            <Link href="/admin" className="font-bold text-lg text-white">
-              MẬT TÔNG
+          <div className="h-14 flex items-center px-4 border-b border-gray-800 gap-2">
+            <Link href="/" className="flex-shrink-0">
+              <img
+                src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+                alt="Mật Tông"
+                className="logo-gold"
+                style={{ height: '32px' }}
+              />
             </Link>
-            <span className="ml-2 text-[10px] bg-[#b8860b]/20 text-[#b8860b] px-1.5 py-0.5 rounded">Admin</span>
+            <span className="text-[10px] bg-[#b8860b]/20 text-[#b8860b] px-1.5 py-0.5 rounded">Admin</span>
           </div>
 
           {/* Navigation */}
@@ -105,7 +110,13 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <Menu className="w-5 h-5" />
           </button>
-          <span className="text-white font-semibold text-sm">MẬT TÔNG Admin</span>
+          <img
+            src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+            alt="Mật Tông"
+            className="logo-gold"
+            style={{ height: '24px' }}
+          />
+          <span className="text-white font-semibold text-xs">Admin</span>
         </header>
 
         <div className="flex-1 p-4 md:p-6 overflow-auto">

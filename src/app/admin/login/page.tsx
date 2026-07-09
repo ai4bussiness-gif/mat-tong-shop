@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 export default function AdminLoginPage() {
@@ -42,7 +43,14 @@ export default function AdminLoginPage() {
     <div className="min-h-screen bg-[#0b1120] flex items-center justify-center p-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="text-2xl font-bold text-white">MẬT TÔNG</h1>
+          <Link href="/" className="inline-block mb-2">
+            <img
+              src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+              alt="Mật Tông"
+              className="logo-gold mx-auto"
+              style={{ height: '48px' }}
+            />
+          </Link>
           <p className="text-sm text-gray-400 mt-1">Admin Panel</p>
         </div>
 

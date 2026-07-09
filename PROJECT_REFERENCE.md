@@ -164,7 +164,7 @@ mat-tong-shop/
 || 2026-07-09 | Việt hóa: Danh Mục, Mới Nhất, Bài Viết; tăng size catalogue (text-4xl) | `src/app/(public)/page.tsx` |
 || 2026-07-09 | Bỏ chữ phụ "Mới Nhất" trùng với heading chính | `src/app/(public)/page.tsx` |
 || 2026-07-09 | Mobile menu: text "MẬT TÔNG" → logo image | `src/components/layout/Header.tsx` |
-|---
+|| 2026-07-09 | Logo: gold tone filter + drop-shadow glow | `globals.css`, `Header.tsx` |
 
 ## 8. Commands
 

@@ -3,7 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
-import { ShoppingBag, CreditCard, Banknote, Check, Copy } from "lucide-react"
+import { ShoppingBag, CreditCard, Banknote, Check, Copy, Upload, ImageUp, Loader } from "lucide-react"
 import { useCartStore } from "@/lib/store"
 import { formatPrice } from "@/lib/utils"
 
@@ -18,6 +18,41 @@ export default function CheckoutPage() {
   const [orderId, setOrderId] = useState<number | null>(null)
   const [orderCode, setOrderCode] = useState<string | null>(null)
   const [transferContent, setTransferContent] = useState<string | null>(null)
+  const [uploading, setUploading] = useState(false)
+  const [proofImg, setProofImg] = useState<string | null>(null)
+
+  const handleUploadProof = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (!file || !orderId) return
+    setUploading(true)
+    try {
+      // Convert to base64
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onload = async () => {
+        const base64 = reader.result
+        const res = await fetch('/api/orders/upload-proof', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ orderId, image: base64 }),
+        })
+        const data = await res.json()
+        if (res.ok && data.url) {
+          setProofImg(data.url)
+        } else {
+          alert(data.error || 'Upload thất bại')
+        }
+        setUploading(false)
+      }
+      reader.onerror = () => {
+        alert('Không thể đọc file')
+        setUploading(false)
+      }
+    } catch {
+      alert('Lỗi upload')
+      setUploading(false)
+    }
+  }
 
   const validate = () => {
     const errs: Record<string, string> = {}
@@ -118,6 +153,37 @@ export default function CheckoutPage() {
                 ))}
               </div>
               {copied && <p className="text-xs text-green-400 mt-2">✓ Đã copy!</p>}
+            </div>
+
+            {/* ═══ Upload ảnh xác nhận ═══ */}
+            <div className="max-w-md mx-auto bg-[#0f172a] border border-gray-800 rounded-xl p-5 mb-6 text-left">
+              <h3 className="text-white font-semibold text-sm mb-3">Xác nhận thanh toán:</h3>
+              <p className="text-xs text-gray-400 mb-3">
+                Sau khi chuyển khoản, vui lòng gửi ảnh chụp màn hình giao dịch để chúng tôi xác nhận đơn hàng nhanh hơn.
+              </p>
+              {proofImg ? (
+                <div className="space-y-3">
+                  <img src={proofImg} alt="Ảnh xác nhận" className="w-full rounded-lg border border-gray-700" />
+                  <p className="text-xs text-green-400 flex items-center gap-1">
+                    <Check className="w-3.5 h-3.5" /> Đã gửi ảnh xác nhận!
+                  </p>
+                </div>
+              ) : uploading ? (
+                <div className="flex items-center gap-2 text-sm text-gray-400 py-3">
+                  <Loader className="w-4 h-4 animate-spin" /> Đang tải lên...
+                </div>
+              ) : (
+                <label className="flex items-center justify-center gap-2 p-4 border-2 border-dashed border-gray-700 rounded-xl cursor-pointer hover:border-[#b8860b]/40 transition-colors">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    className="hidden"
+                    onChange={handleUploadProof}
+                  />
+                  <ImageUp className="w-5 h-5 text-gray-500" />
+                  <span className="text-sm text-gray-400">Chọn ảnh chụp chuyển khoản</span>
+                </label>
+              )}
             </div>
           )}
           <Link

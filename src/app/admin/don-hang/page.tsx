@@ -111,6 +111,24 @@ export default function AdminOrdersPage() {
                 </div>
               )}
 
+              {order.paymentProof && (
+                <div className="mt-2">
+                  <details className="group">
+                    <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-300 transition-colors flex items-center gap-1.5">
+                      <span>📷 Xem ảnh xác nhận thanh toán</span>
+                    </summary>
+                    <div className="mt-2">
+                      <img
+                        src={order.paymentProof}
+                        alt="Xác nhận thanh toán"
+                        className="w-full max-w-sm rounded-lg border border-gray-700 cursor-pointer hover:opacity-90 transition-opacity"
+                        onClick={() => window.open(order.paymentProof!, '_blank')}
+                      />
+                    </div>
+                  </details>
+                </div>
+              )}
+
               <details className="mt-3">
                 <summary className="text-xs text-gray-500 cursor-pointer hover:text-gray-300 transition-colors">
                   Chi tiết sản phẩm ({JSON.parse(order.items).length} món)

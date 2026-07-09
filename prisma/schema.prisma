@@ -49,6 +49,7 @@ model Order {
   customerPhone    String
   customerAddress  String
   note             String?
+  paymentProof     String?  // Cloudinary URL ảnh xác nhận chuyển khoản
   status           String   @default("pending") // pending, confirmed, shipping, delivered, cancelled
   paymentMethod    String   @default("bank_transfer") // bank_transfer, vnpay
   paid             Boolean  @default(false)

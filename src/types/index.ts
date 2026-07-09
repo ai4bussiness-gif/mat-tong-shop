@@ -35,6 +35,7 @@ export type Order = {
   customerPhone: string
   customerAddress: string
   note: string | null
+  paymentProof: string | null
   status: string
   paymentMethod: string
   paid: boolean

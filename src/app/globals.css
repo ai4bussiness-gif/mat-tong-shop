@@ -115,3 +115,24 @@ img {
 .logo-shimmer .logo-gold:hover {
   filter: brightness(0.78) sepia(0.4) saturate(2);
 }
+
+/* ══════ MỘT FLARE NHẸ Ở CẠNH BIỂU TƯỢNG ══════ */
+.logo-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 2px;
+  background: radial-gradient(
+    circle 35px at 27% 50%,
+    rgba(255, 215, 0, 0.2) 0%,
+    rgba(255, 215, 0, 0.08) 40%,
+    transparent 70%
+  );
+  animation: flare-pulse 3.5s ease-in-out infinite;
+}
+
+@keyframes flare-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}

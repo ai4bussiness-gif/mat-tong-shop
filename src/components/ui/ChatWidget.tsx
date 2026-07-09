@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { MessageCircle, Send, X, ChevronRight } from "lucide-react"
 
 // ═══ CẤU HÌNH ═══
-const TELEGRAM_USERNAME = "mat_tong_shop" // ← thay username Telegram thật
+const TELEGRAM_USERNAME = "andyhoang0911" // Telegram của Andy Hoang
 const PHONE_NUMBER = "0977693109"          // ← sđt liên hệ
 
 export default function ChatWidget() {

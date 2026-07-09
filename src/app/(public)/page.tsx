@@ -43,7 +43,7 @@ export default async function HomePage() {
                 Sản Phẩm Của Chúng Tôi
               </p>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mt-2">
-                Our <span className="text-[#b8860b]">Categories</span>
+                Danh <span className="text-[#b8860b]">Mục</span>
               </h2>
               <div className="w-12 h-0.5 bg-[#b8860b] mx-auto mt-3 rounded-full" />
             </div>
@@ -87,7 +87,7 @@ export default async function HomePage() {
           <section key={col.slug} className={`py-10 sm:py-14 ${bgClass}`}>
             <div className="container-page">
               <div className="text-center mb-8">
-                <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mt-2">
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mt-2">
                   <span className="text-gray-300 font-medium">{col.heading.split(' ')[0]} </span>
                   <span className="text-[#b8860b]">{col.heading.split(' ').slice(1).join(' ')}</span>
                 </h2>
@@ -118,7 +118,7 @@ export default async function HomePage() {
                 Mới Nhất
               </p>
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white mt-2">
-                NEW <span className="text-[#b8860b]">ARRIVALS</span>
+                Mới <span className="text-[#b8860b]">Nhất</span>
               </h2>
               <div className="w-12 h-0.5 bg-[#b8860b] mx-auto mt-3 rounded-full" />
             </div>
@@ -175,7 +175,7 @@ export default async function HomePage() {
                   Kiến Thức
                 </p>
                 <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-white">
-                  Blog <span className="text-[#b8860b]">Posts</span>
+                  Bài <span className="text-[#b8860b]">Viết</span>
                 </h2>
               </div>
               <Link

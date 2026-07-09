@@ -42,7 +42,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside
         className={`${
           sidebarOpen ? 'w-60 translate-x-0' : 'w-60 -translate-x-full'
-        } fixed left-0 top-0 z-50 h-full bg-[#0f172a] border-r border-gray-800 flex-shrink-0 transition-all duration-200 overflow-hidden lg:static lg:translate-x-0`}
+        } fixed left-0 top-0 z-50 h-full bg-[#0f172a] border-r border-gray-800 flex-shrink-0 transition-all duration-200 overflow-hidden lg:static lg:translate-x-0 lg:relative`}
       >
         <div className="w-60">
           {/* Logo */}

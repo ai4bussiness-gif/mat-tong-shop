@@ -116,7 +116,7 @@ img {
   filter: brightness(0.78) sepia(0.4) saturate(2);
 }
 
-/* ══════ MỘT FLARE NHẸ Ở CẠNH BIỂU TƯỢNG ══════ */
+/* ══════ MỘT FLARE Ở CẠNH BIỂU TƯỢNG (chỉ lóe 1 lần) ══════ */
 .logo-shimmer::after {
   content: '';
   position: absolute;
@@ -125,15 +125,17 @@ img {
   border-radius: 2px;
   background: radial-gradient(
     circle 48px at 27% 50%,
-    rgba(255, 215, 0, 0.3) 0%,
-    rgba(255, 215, 0, 0.12) 35%,
-    rgba(255, 215, 0, 0.04) 55%,
+    rgba(255, 215, 0, 0.45) 0%,
+    rgba(255, 215, 0, 0.18) 35%,
+    rgba(255, 215, 0, 0.06) 55%,
     transparent 75%
   );
-  animation: flare-pulse 3.5s ease-in-out infinite;
+  animation: flare-once 2.5s ease-out forwards;
 }
 
-@keyframes flare-pulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+@keyframes flare-once {
+  0%   { opacity: 0; }
+  15%  { opacity: 1; }
+  40%  { opacity: 0.85; }
+  100% { opacity: 0.85; }
 }

@@ -124,15 +124,16 @@ img {
   pointer-events: none;
   border-radius: 2px;
   background: radial-gradient(
-    circle 35px at 27% 50%,
-    rgba(255, 215, 0, 0.2) 0%,
-    rgba(255, 215, 0, 0.08) 40%,
-    transparent 70%
+    circle 48px at 27% 50%,
+    rgba(255, 215, 0, 0.3) 0%,
+    rgba(255, 215, 0, 0.12) 35%,
+    rgba(255, 215, 0, 0.04) 55%,
+    transparent 75%
   );
   animation: flare-pulse 3.5s ease-in-out infinite;
 }
 
 @keyframes flare-pulse {
-  0%, 100% { opacity: 0.35; }
+  0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
 }

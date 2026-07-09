@@ -40,11 +40,11 @@ export function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <div className="logo-shimmer logo-glow">
+            <div className="logo-shimmer">
               <img
                 src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
                 alt="Mật Tông"
-                className="logo-gold"
+                className="logo-gold logo-glow"
                 style={{ height: '48px', maxWidth: 'none' }}
               />
             </div>
@@ -152,11 +152,11 @@ export function Header() {
           <div className="w-72 max-w-[85vw] h-full bg-[#0b1120] border-r border-gray-800 overflow-y-auto">
             <div className="flex items-center justify-between p-4 border-b border-gray-800">
               <Link href="/" onClick={() => setMenuOpen(false)}>
-                <div className="logo-shimmer logo-glow">
+                <div className="logo-shimmer">
                   <img
                     src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
                     alt="Mật Tông"
-                    className="logo-gold"
+                    className="logo-gold logo-glow"
                     style={{ height: '40px', maxWidth: 'none' }}
                   />
                 </div>

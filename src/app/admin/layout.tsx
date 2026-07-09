@@ -48,11 +48,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Logo */}
           <div className="h-14 flex items-center px-4 border-b border-gray-800 gap-2">
             <Link href="/" className="flex-shrink-0">
-              <div className="logo-shimmer logo-glow">
+              <div className="logo-shimmer">
                 <img
                   src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
                   alt="Mật Tông"
-                  className="logo-gold"
+                  className="logo-gold logo-glow"
                   style={{ height: '32px', maxWidth: 'none' }}
                 />
               </div>
@@ -112,11 +112,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <Menu className="w-5 h-5" />
           </button>
-          <div className="logo-shimmer logo-glow">
+          <div className="logo-shimmer">
             <img
               src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
               alt="Mật Tông"
-              className="logo-gold"
+              className="logo-gold logo-glow"
               style={{ height: '24px', maxWidth: 'none' }}
             />
           </div>

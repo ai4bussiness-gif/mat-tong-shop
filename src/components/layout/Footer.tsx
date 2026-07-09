@@ -35,11 +35,11 @@ export function Footer() {
         {/* Brand */}
         <div>
           <Link href="/" className="inline-block">
-            <div className="logo-shimmer logo-glow">
+            <div className="logo-shimmer">
               <img
                 src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
                 alt="Mật Tông"
-                className="logo-gold"
+                className="logo-gold logo-glow"
                 style={{ height: '42px', maxWidth: 'none' }}
               />
             </div>

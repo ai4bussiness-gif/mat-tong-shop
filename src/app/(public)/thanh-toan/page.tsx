@@ -100,7 +100,7 @@ export default function CheckoutPage() {
                   { label: 'Ngân hàng', value: 'VietinBank' },
                   { label: 'Số tài khoản', value: '108865812222' },
                   { label: 'Chủ tài khoản', value: 'Mật Tông' },
-                  { label: 'Nội dung CK', value: transferContent || (orderId ? `CKMT${orderId}` : 'Mật Tông Shop') },
+                  { label: 'Nội dung CK', value: transferContent || (orderId ? `CKMT${orderId}` : 'Mật Tông') },
                 ].map((item) => (
                   <div key={item.label} className="flex items-center justify-between py-1.5 border-b border-gray-800 last:border-0">
                     <span className="text-gray-400">{item.label}</span>

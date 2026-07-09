@@ -42,11 +42,11 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       <aside
         className={`${
           sidebarOpen ? 'w-60 translate-x-0' : 'w-60 -translate-x-full'
-        } fixed left-0 top-0 z-50 h-full bg-[#0f172a] border-r border-gray-800 flex-shrink-0 transition-all duration-200 overflow-hidden lg:static lg:translate-x-0 lg:relative`}
+        } fixed left-0 top-0 z-50 h-full bg-[#0f172a] border-r border-gray-800 flex-shrink-0 transition-all duration-200 overflow-hidden lg:translate-x-0 lg:relative`}
       >
-        <div className="w-60">
+        <div className="w-60 h-full flex flex-col">
           {/* Logo */}
-          <div className="h-14 flex items-center px-4 border-b border-gray-800 gap-2">
+          <div className="h-14 flex items-center px-4 border-b border-gray-800 gap-2 flex-shrink-0">
             <Link href="/" className="flex-shrink-0">
               <div className="logo-shimmer">
                 <img
@@ -61,7 +61,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
 
           {/* Navigation */}
-          <nav className="p-3 space-y-1">
+          <nav className="flex-1 overflow-y-auto p-3 space-y-1">
             {navItems.map((item) => {
               const Icon = item.icon
               const isActive = pathname === item.href || pathname.startsWith(item.href + '/')
@@ -83,7 +83,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </nav>
 
           {/* Bottom */}
-          <div className="absolute bottom-0 w-60 p-3 border-t border-gray-800">
+          <div className="flex-shrink-0 p-3 border-t border-gray-800">
             <Link
               href="/"
               className="flex items-center gap-2 px-3 py-2 text-sm text-gray-500 hover:text-gray-300 transition-colors rounded-lg hover:bg-gray-800/50"

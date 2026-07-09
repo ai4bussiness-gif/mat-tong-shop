@@ -117,39 +117,154 @@ img {
   filter: brightness(0.78) sepia(0.4) saturate(2);
 }
 
-/* Hiệu ứng lấp lánh (shimmer) quét ngang */
+/* ══════ SAO BĂNG (Meteor streaks) ══════ */
 .logo-shimmer::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    105deg,
-    transparent 25%,
-    rgba(255, 215, 0, 0.08) 40%,
-    rgba(255, 215, 0, 0.18) 50%,
-    rgba(255, 215, 0, 0.08) 60%,
-    transparent 75%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 4s ease-in-out infinite;
   pointer-events: none;
-}
-@keyframes shimmer {
-  0% { background-position: 200% 0; }
-  100% { background-position: -200% 0; }
+  border-radius: 2px;
+  /* 2 vệt sao băng chéo, mỗi vệt là 1 đường kẻ sáng */
+  background:
+    linear-gradient(135deg,
+      transparent 0%, transparent 25%,
+      rgba(255,215,0,0.5) 38%, rgba(255,235,150,0.7) 42%,
+      rgba(255,215,0,0.4) 46%, transparent 55%, transparent 100%
+    ) 0 0 / 120px 2px no-repeat,
+    linear-gradient(125deg,
+      transparent 0%, transparent 20%,
+      rgba(255,215,0,0.35) 35%, rgba(255,235,150,0.5) 40%,
+      rgba(255,215,0,0.3) 45%, transparent 55%, transparent 100%
+    ) 0 0 / 80px 1px no-repeat,
+    linear-gradient(140deg,
+      transparent 0%, transparent 30%,
+      rgba(255,215,0,0.3) 42%, rgba(255,235,150,0.5) 46%,
+      rgba(255,215,0,0.25) 50%, transparent 60%, transparent 100%
+    ) 0 0 / 60px 1px no-repeat;
+  animation: meteor-shower-1 4s ease-in-out infinite,
+             meteor-shower-2 5s ease-in-out 0.5s infinite,
+             meteor-shower-3 6s ease-in-out 1.5s infinite;
 }
 
-/* Glow riêng — pulse nhẹ để logo không bị tĩnh */
+@keyframes meteor-shower-1 {
+  0%   { background-position: -120px -30px, 0 0, 0 0; opacity: 0; }
+  4%   { opacity: 1; }
+  10%  { background-position: 260px 160px, 0 0, 0 0; opacity: 0.9; }
+  14%  { opacity: 0; }
+  100% { background-position: 260px 160px, 0 0, 0 0; opacity: 0; }
+}
+@keyframes meteor-shower-2 {
+  0%   { background-position: 0 0, -80px -10px, 0 0; opacity: 0; }
+  6%   { opacity: 1; }
+  14%  { background-position: 0 0, 220px 130px, 0 0; opacity: 0.8; }
+  18%  { opacity: 0; }
+  100% { background-position: 0 0, 220px 130px, 0 0; opacity: 0; }
+}
+@keyframes meteor-shower-3 {
+  0%   { background-position: 0 0, 0 0, -60px -50px; opacity: 0; }
+  8%   { opacity: 1; }
+  16%  { background-position: 0 0, 0 0, 200px 100px; opacity: 0.7; }
+  20%  { opacity: 0; }
+  100% { background-position: 0 0, 0 0, 200px 100px; opacity: 0; }
+}
+
+/* ══════ HẠT LẤP LÁNH (Sparkle particles) ══════ */
+.logo-shimmer::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: 2px;
+  animation: sparkle 3s ease-in-out infinite;
+}
+
+@keyframes sparkle {
+  0% { box-shadow:
+    25px 10px 0 2px  rgba(255,215,0,0.8),
+    60px 30px 0 1px  rgba(255,235,150,0.3),
+    95px 8px  0 3px  rgba(255,215,0,0.7),
+    130px 38px 0 1.5px rgba(255,235,150,0.4),
+    165px 20px 0 2px  rgba(255,215,0,0.6),
+    30px 45px 0 1px  rgba(255,235,150,0.5),
+    75px 18px 0 2.5px rgba(255,215,0,0.65),
+    110px 35px 0 1px  rgba(255,235,150,0.7),
+    145px 5px  0 2px  rgba(255,215,0,0.3),
+    180px 25px 0 1px  rgba(255,235,150,0.8),
+    45px 22px 0 2px  rgba(255,215,0,0.45),
+    200px 15px 0 1.5px rgba(255,235,150,0.75);
+  }
+  25% { box-shadow:
+    25px 10px 0 2px  rgba(255,215,0,0.3),
+    60px 30px 0 1px  rgba(255,235,150,0.9),
+    95px 8px  0 3px  rgba(255,215,0,0.2),
+    130px 38px 0 1.5px rgba(255,235,150,0.8),
+    165px 20px 0 2px  rgba(255,215,0,0.3),
+    30px 45px 0 1px  rgba(255,235,150,0.1),
+    75px 18px 0 2.5px rgba(255,215,0,0.9),
+    110px 35px 0 1px  rgba(255,235,150,0.2),
+    145px 5px  0 2px  rgba(255,215,0,0.8),
+    180px 25px 0 1px  rgba(255,235,150,0.2),
+    45px 22px 0 2px  rgba(255,215,0,0.7),
+    200px 15px 0 1.5px rgba(255,235,150,0.3);
+  }
+  50% { box-shadow:
+    25px 10px 0 2px  rgba(255,215,0,0.1),
+    60px 30px 0 1px  rgba(255,235,150,0.3),
+    95px 8px  0 3px  rgba(255,215,0,0.9),
+    130px 38px 0 1.5px rgba(255,235,150,0.2),
+    165px 20px 0 2px  rgba(255,215,0,0.7),
+    30px 45px 0 1px  rgba(255,235,150,0.8),
+    75px 18px 0 2.5px rgba(255,215,0,0.3),
+    110px 35px 0 1px  rgba(255,235,150,0.6),
+    145px 5px  0 2px  rgba(255,215,0,0.2),
+    180px 25px 0 1px  rgba(255,235,150,0.7),
+    45px 22px 0 2px  rgba(255,215,0,0.1),
+    200px 15px 0 1.5px rgba(255,235,150,0.9);
+  }
+  75% { box-shadow:
+    25px 10px 0 2px  rgba(255,215,0,0.6),
+    60px 30px 0 1px  rgba(255,235,150,0.7),
+    95px 8px  0 3px  rgba(255,215,0,0.4),
+    130px 38px 0 1.5px rgba(255,235,150,0.1),
+    165px 20px 0 2px  rgba(255,215,0,0.8),
+    30px 45px 0 1px  rgba(255,235,150,0.4),
+    75px 18px 0 2.5px rgba(255,215,0,0.5),
+    110px 35px 0 1px  rgba(255,235,150,0.9),
+    145px 5px  0 2px  rgba(255,215,0,0.6),
+    180px 25px 0 1px  rgba(255,235,150,0.3),
+    45px 22px 0 2px  rgba(255,215,0,0.8),
+    200px 15px 0 1.5px rgba(255,235,150,0.5);
+  }
+  100% { box-shadow:
+    25px 10px 0 2px  rgba(255,215,0,0.8),
+    60px 30px 0 1px  rgba(255,235,150,0.3),
+    95px 8px  0 3px  rgba(255,215,0,0.7),
+    130px 38px 0 1.5px rgba(255,235,150,0.4),
+    165px 20px 0 2px  rgba(255,215,0,0.6),
+    30px 45px 0 1px  rgba(255,235,150,0.5),
+    75px 18px 0 2.5px rgba(255,215,0,0.65),
+    110px 35px 0 1px  rgba(255,235,150,0.7),
+    145px 5px  0 2px  rgba(255,215,0,0.3),
+    180px 25px 0 1px  rgba(255,235,150,0.8),
+    45px 22px 0 2px  rgba(255,215,0,0.45),
+    200px 15px 0 1.5px rgba(255,235,150,0.75);
+  }
+}
+
+/* ══════ GLOW PULSE ══════ */
 .logo-glow {
   filter: drop-shadow(0 0 6px rgba(184, 134, 11, 0.2));
   animation: glow-pulse 3s ease-in-out infinite;
 }
 @keyframes glow-pulse {
   0%, 100% { filter: drop-shadow(0 0 6px rgba(184, 134, 11, 0.2)); }
-  50% { filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.45)); }
+  50% { filter: drop-shadow(0 0 16px rgba(184, 134, 11, 0.5)); }
 }
 
-/* Hover: shimmer nhanh hơn */
+/* Hover: sao băng bay nhanh hơn + sparkle rõ hơn */
 .logo-shimmer:hover::after {
+  animation-duration: 2s, 2.5s, 3s;
+}
+.logo-shimmer:hover::before {
   animation-duration: 1.5s;
 }

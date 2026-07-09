@@ -159,13 +159,14 @@ mat-tong-shop/
 | 2026-07-09 | Đổi logo text → ảnh logo crop 300×80, height 48px | `src/components/layout/Header.tsx` |
 | 2026-07-09 | Thêm favicon từ Cloudinary | `src/app/layout.tsx` |
 | 2026-07-09 | Update metadata title + description | `src/app/layout.tsx` |
-|| 2026-07-09 | Bỏ "Explore our" + "Collections" khỏi heading section — giữ thuần tên danh mục | `src/app/(public)/page.tsx` |
-|| 2026-07-09 | Thêm "Chư" vào heading: "Chư Phật", "Chư Bồ Tát"... tách 2 màu (xám + vàng) | `src/app/(public)/page.tsx` |
-|| 2026-07-09 | Việt hóa: Danh Mục, Mới Nhất, Bài Viết; tăng size catalogue (text-4xl) | `src/app/(public)/page.tsx` |
-|| 2026-07-09 | Bỏ chữ phụ "Mới Nhất" trùng với heading chính | `src/app/(public)/page.tsx` |
-|| 2026-07-09 | Mobile menu: text "MẬT TÔNG" → logo image | `src/components/layout/Header.tsx` |
-|| 2026-07-09 | Logo: gold tone filter + drop-shadow glow | `globals.css`, `Header.tsx` |
-
+|| 2026-07-09 | Bỏ "Explore our" + "Collections" khỏi heading section | `src/app/(public)/page.tsx` |
+|| 2026-07-09 | Thêm "Chư" vào heading: tách 2 màu (xám + vàng) | `src/app/(public)/page.tsx` |
+|| 2026-07-09 | Việt hóa + tăng size catalogue heading (text-4xl) | `src/app/(public)/page.tsx` |
+|| 2026-07-09 | Bỏ chữ phụ miêu tả trùng heading | `src/app/(public)/page.tsx` |
+|| 2026-07-09 | "Chư" inherit font-bold (đồng bộ size với tên chính) | `src/app/(public)/page.tsx` |
+|| 2026-07-09 | Mobile menu: text → logo image | `Header.tsx` |
+|| 2026-07-09 | Logo: gold tone + shimmer sweep + glow pulse (6 vị trí) | `globals.css`, `Header.tsx`, `Footer.tsx`, `admin/layout.tsx`, `admin/login/page.tsx` |
+|
 ## 8. Commands
 
 ```bash

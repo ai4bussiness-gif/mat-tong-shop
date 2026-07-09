@@ -88,7 +88,7 @@ export default async function HomePage() {
             <div className="container-page">
               <div className="text-center mb-8">
                 <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mt-2">
-                  <span className="text-gray-300 font-medium">{col.heading.split(' ')[0]} </span>
+                  <span className="text-gray-300">{col.heading.split(' ')[0]} </span>
                   <span className="text-[#b8860b]">{col.heading.split(' ').slice(1).join(' ')}</span>
                 </h2>
                 <p className="text-gray-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">

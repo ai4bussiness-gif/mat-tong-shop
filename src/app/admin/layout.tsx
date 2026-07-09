@@ -25,7 +25,7 @@ const navItems = [
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
   const router = useRouter()
-  const [sidebarOpen, setSidebarOpen] = useState(true)
+  const [sidebarOpen, setSidebarOpen] = useState(false)
 
   // Don't show sidebar on login page
   if (pathname === '/admin/login') return <>{children}</>
@@ -41,8 +41,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
       {/* Sidebar */}
       <aside
         className={`${
-          sidebarOpen ? 'w-60' : 'w-0 -ml-60'
-        } bg-[#0f172a] border-r border-gray-800 flex-shrink-0 transition-all duration-200 overflow-hidden lg:w-60 lg:ml-0`}
+          sidebarOpen ? 'w-60 translate-x-0' : 'w-60 -translate-x-full'
+        } fixed left-0 top-0 z-50 h-full bg-[#0f172a] border-r border-gray-800 flex-shrink-0 transition-all duration-200 overflow-hidden lg:static lg:translate-x-0`}
       >
         <div className="w-60">
           {/* Logo */}
@@ -101,6 +101,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </div>
         </div>
       </aside>
+
+      {/* Backdrop — đóng sidebar khi chạm ra ngoài (mobile) */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 bg-black/50 z-40 lg:hidden"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">

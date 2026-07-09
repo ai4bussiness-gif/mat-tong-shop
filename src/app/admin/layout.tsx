@@ -48,12 +48,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           {/* Logo */}
           <div className="h-14 flex items-center px-4 border-b border-gray-800 gap-2">
             <Link href="/" className="flex-shrink-0">
-              <img
-                src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
-                alt="Mật Tông"
-                className="logo-gold"
-                style={{ height: '32px' }}
-              />
+              <div className="logo-shimmer logo-glow">
+                <img
+                  src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+                  alt="Mật Tông"
+                  className="logo-gold"
+                  style={{ height: '32px', maxWidth: 'none' }}
+                />
+              </div>
             </Link>
             <span className="text-[10px] bg-[#b8860b]/20 text-[#b8860b] px-1.5 py-0.5 rounded">Admin</span>
           </div>
@@ -110,12 +112,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           >
             <Menu className="w-5 h-5" />
           </button>
-          <img
-            src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
-            alt="Mật Tông"
-            className="logo-gold"
-            style={{ height: '24px' }}
-          />
+          <div className="logo-shimmer logo-glow">
+            <img
+              src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+              alt="Mật Tông"
+              className="logo-gold"
+              style={{ height: '24px', maxWidth: 'none' }}
+            />
+          </div>
           <span className="text-white font-semibold text-xs">Admin</span>
         </header>
 

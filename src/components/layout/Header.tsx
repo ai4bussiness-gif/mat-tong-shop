@@ -40,12 +40,14 @@ export function Header() {
 
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2">
-            <img
-              src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
-              alt="Mật Tông"
-              className="w-auto max-w-full logo-gold"
-              style={{ height: '48px' }}
-            />
+            <div className="logo-shimmer logo-glow">
+              <img
+                src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+                alt="Mật Tông"
+                className="logo-gold"
+                style={{ height: '48px', maxWidth: 'none' }}
+              />
+            </div>
           </Link>
 
           {/* Desktop nav */}
@@ -150,12 +152,14 @@ export function Header() {
           <div className="w-72 max-w-[85vw] h-full bg-[#0b1120] border-r border-gray-800 overflow-y-auto">
             <div className="flex items-center justify-between p-4 border-b border-gray-800">
               <Link href="/" onClick={() => setMenuOpen(false)}>
-                <img
-                  src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
-                  alt="Mật Tông"
-                  className="w-auto logo-gold"
-                  style={{ height: '40px' }}
-                />
+                <div className="logo-shimmer logo-glow">
+                  <img
+                    src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+                    alt="Mật Tông"
+                    className="logo-gold"
+                    style={{ height: '40px', maxWidth: 'none' }}
+                  />
+                </div>
               </Link>
               <button onClick={() => setMenuOpen(false)} className="text-gray-400 hover:text-white transition-colors">
                 <X className="w-5 h-5" />

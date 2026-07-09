@@ -101,11 +101,55 @@ img {
   border-radius: 2px;
 }
 
-/* Logo gold tone — tối hơn, ấm hơn, phù hợp nền tối */
-.logo-gold {
-  filter: brightness(0.72) sepia(0.45) saturate(2.2) drop-shadow(0 0 8px rgba(184, 134, 11, 0.25));
+/* Logo gold tone — phù hợp nền tối */
+.logo-shimmer {
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.logo-shimmer .logo-gold {
+  display: block;
+  filter: brightness(0.72) sepia(0.45) saturate(2.2);
   transition: filter 0.4s ease;
 }
-.logo-gold:hover {
-  filter: brightness(0.78) sepia(0.4) saturate(2) drop-shadow(0 0 14px rgba(184, 134, 11, 0.5));
+.logo-shimmer .logo-gold:hover {
+  filter: brightness(0.78) sepia(0.4) saturate(2);
+}
+
+/* Hiệu ứng lấp lánh (shimmer) quét ngang */
+.logo-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 25%,
+    rgba(255, 215, 0, 0.08) 40%,
+    rgba(255, 215, 0, 0.18) 50%,
+    rgba(255, 215, 0, 0.08) 60%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 4s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Glow riêng — pulse nhẹ để logo không bị tĩnh */
+.logo-glow {
+  filter: drop-shadow(0 0 6px rgba(184, 134, 11, 0.2));
+  animation: glow-pulse 3s ease-in-out infinite;
+}
+@keyframes glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(184, 134, 11, 0.2)); }
+  50% { filter: drop-shadow(0 0 12px rgba(184, 134, 11, 0.45)); }
+}
+
+/* Hover: shimmer nhanh hơn */
+.logo-shimmer:hover::after {
+  animation-duration: 1.5s;
 }

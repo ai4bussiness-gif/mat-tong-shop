@@ -35,14 +35,16 @@ export function Footer() {
         {/* Brand */}
         <div>
           <Link href="/" className="inline-block">
-            <img
-              src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
-              alt="Mật Tông"
-              className="logo-gold"
-              style={{ height: '42px' }}
-            />
+            <div className="logo-shimmer logo-glow">
+              <img
+                src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+                alt="Mật Tông"
+                className="logo-gold"
+                style={{ height: '42px', maxWidth: 'none' }}
+              />
+            </div>
           </Link>
-          <p className="text-sm text-gray-400 leading-relaxed mb-6">
+          <p className="text-sm text-gray-400 leading-relaxed mb-6 mt-4">
             Chuyên tượng Phật Mật Tông thủ công nhập khẩu Nepal, Tây Tạng. Tượng đồng, pháp khí, tranh Thangka, linh phẩm chính gốc.
           </p>
           <div className="flex items-center gap-3">

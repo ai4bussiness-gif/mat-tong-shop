@@ -44,12 +44,14 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
           <Link href="/" className="inline-block mb-2">
-            <img
-              src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
-              alt="Mật Tông"
-              className="logo-gold mx-auto"
-              style={{ height: '48px' }}
-            />
+            <div className="logo-shimmer logo-glow">
+              <img
+                src="https://res.cloudinary.com/zgl5avbd/image/upload/v1783574851/mat-tong/logo.png"
+                alt="Mật Tông"
+                className="logo-gold"
+                style={{ height: '48px', maxWidth: 'none' }}
+              />
+            </div>
           </Link>
           <p className="text-sm text-gray-400 mt-1">Admin Panel</p>
         </div>

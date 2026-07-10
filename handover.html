@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bàn Giao Dự Án — Hướng Dẫn Triển Khai</title>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #030712;
+    --card: #0f172a;
+    --border: #1e293b;
+    --accent: #b8860b;
+    --accent-hover: #d4a017;
+    --text: #e2e8f0;
+    --text-dim: #94a3b8;
+    --green: #059669;
+    --red: #dc2626;
+    --radius: 12px;
+  }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 20px;
+  }
+  .container { max-width: 800px; margin: 0 auto; }
+  h1 {
+    font-size: 28px; font-weight: 700;
+    background: linear-gradient(135deg, #b8860b, #f0d070);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+  .subtitle { color: var(--text-dim); font-size: 14px; margin-bottom: 32px; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .card-header {
+    display: flex; align-items: center; gap: 12px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .card-header:hover { background: rgba(255,255,255,0.03); }
+  .card-header .num {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: var(--accent); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; flex-shrink: 0;
+  }
+  .card-header .num.done { background: var(--green); }
+  .card-header h2 { font-size: 15px; font-weight: 600; flex: 1; }
+  .card-header .icon { font-size: 16px; color: var(--text-dim); transition: transform 0.2s; }
+  .card-header .icon.open { transform: rotate(180deg); }
+  .card-body { padding: 0 20px 20px; display: none; }
+  .card-body.open { display: block; }
+  .card-body p, .card-body ol, .card-body ul { font-size: 14px; color: var(--text-dim); margin-bottom: 12px; }
+  .card-body ol, .card-body ul { padding-left: 20px; }
+  .card-body li { margin-bottom: 6px; }
+  .card-body a { color: var(--accent); }
+
+  .field { margin-bottom: 14px; }
+  .field label {
+    display: block; font-size: 13px; font-weight: 500;
+    color: var(--text-dim); margin-bottom: 4px;
+  }
+  .field input, .field textarea {
+    width: 100%; padding: 10px 14px;
+    background: #1a2332; border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-size: 14px;
+    transition: border-color 0.2s;
+    font-family: 'SFMono-Regular', Consolas, monospace;
+  }
+  .field input:focus, .field textarea:focus {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(184,134,11,0.15);
+  }
+  .field textarea { min-height: 60px; resize: vertical; }
+  .field .hint { font-size: 12px; color: #6b7280; margin-top: 3px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+  @media (max-width: 600px) { .row2, .row3 { grid-template-columns: 1fr; } }
+
+  .check-item {
+    display: flex; align-items: center; gap: 10px;
+    padding: 10px 14px; background: #1a2332;
+    border-radius: 8px; margin-bottom: 8px;
+    font-size: 14px;
+  }
+  .check-item input[type="checkbox"] {
+    width: 18px; height: 18px; accent-color: var(--accent); flex-shrink: 0;
+  }
+  .check-item.done { opacity: 0.6; }
+  .check-item.done label { text-decoration: line-through; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 28px; border: none; border-radius: 10px;
+    font-size: 15px; font-weight: 600; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-primary:hover { background: var(--accent-hover); }
+  .btn-secondary {
+    background: #1a2332; color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .btn-secondary:hover { background: #243044; }
+
+  .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
+  .progress-bar {
+    height: 4px; background: var(--border); border-radius: 2px;
+    margin-bottom: 24px; overflow: hidden;
+  }
+  .progress-bar .fill {
+    height: 100%; background: linear-gradient(90deg, var(--accent), #f0d070);
+    border-radius: 2px; transition: width 0.4s;
+    width: 0%;
+  }
+  .done-badge {
+    display: inline-block; background: var(--green); color: #fff;
+    font-size: 11px; padding: 2px 8px; border-radius: 10px;
+    margin-left: auto;
+  }
+  footer {
+    text-align: center; color: var(--text-dim); font-size: 13px;
+    padding: 24px 0; border-top: 1px solid var(--border); margin-top: 32px;
+  }
+</style>
+</head>
+<body>
+<div class="container" id="app">
+
+  <!-- HEADER -->
+  <div style="display:flex;align-items:center;gap:12px;margin-bottom:4px">
+    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="2">
+      <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+    </svg>
+    <h1>Bàn Giao Dự Án</h1>
+  </div>
+  <p class="subtitle">Làm từng bước theo hướng dẫn. Cuối cùng export JSON để gửi cho đội kỹ thuật triển khai.</p>
+
+  <!-- PROGRESS -->
+  <div class="progress-bar"><div class="fill" id="progressFill"></div></div>
+
+  <!-- STEPS -->
+  <div id="steps"></div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <button class="btn btn-primary" onclick="exportJSON()">📦 Export JSON</button>
+    <button class="btn btn-secondary" onclick="clearAll()">🗑️ Xoá toàn bộ</button>
+  </div>
+
+  <footer>
+    Dữ liệu được lưu trên trình duyệt của bạn. Không gửi đi đâu.<br>
+    Sau khi export, gửi file .json cho đội kỹ thuật.
+  </footer>
+</div>
+
+<script>
+// === DEFINE STEPS ===
+const STEPS = [
+  {
+    id: 'info',
+    title: 'Thông tin shop',
+    desc: 'Điền thông tin cơ bản của shop.',
+    fields: [
+      { id: 'site.name', label: 'Tên shop', ph: 'VD: Tượng Mật Tông' },
+      { id: 'site.tagline', label: 'Tagline', ph: 'VD: Tượng Phật Thủ Công' },
+      { id: 'site.description', label: 'Mô tả SEO', type: 'textarea', ph: 'Mô tả ngắn về shop...' },
+      { id: 'site.email', label: 'Email liên hệ', ph: 'info@shop.com' },
+      { id: 'site.phone', label: 'Số điện thoại', ph: '0900 000 000' },
+      { id: 'site.address', label: 'Địa chỉ', ph: 'Việt Nam' },
+    ]
+  },
+  {
+    id: 'social',
+    title: 'Mạng xã hội',
+    desc: 'Link Facebook, Instagram, YouTube, TikTok, Pinterest.',
+    fields: [
+      { id: 'social.facebook', label: 'Facebook URL', ph: 'https://facebook.com/shop' },
+      { id: 'social.instagram', label: 'Instagram URL', ph: 'https://instagram.com/shop' },
+      { id: 'social.youtube', label: 'YouTube URL', ph: 'https://youtube.com/@shop' },
+      { id: 'social.tiktok', label: 'TikTok URL', ph: 'https://tiktok.com/@shop' },
+      { id: 'social.pinterest', label: 'Pinterest URL', ph: 'https://pinterest.com/shop' },
+    ]
+  },
+  {
+    id: 'bank',
+    title: 'Thông tin ngân hàng',
+    desc: 'Tài khoản nhận thanh toán từ khách hàng.',
+    fields: [
+      { id: 'bank.bankName', label: 'Tên ngân hàng', ph: 'VD: Vietcombank' },
+      { id: 'bank.accountNumber', label: 'Số tài khoản', ph: '0021000403922' },
+      { id: 'bank.accountHolder', label: 'Chủ tài khoản', ph: 'Hoàng Hà' },
+    ]
+  },
+  {
+    id: 'services',
+    title: 'Tạo tài khoản dịch vụ',
+    descHtml: true,
+    desc: `
+      <ol>
+        <li><strong>Vercel:</strong> Vào <a href="https://vercel.com" target="_blank">vercel.com</a> → Đăng ký → Tạo project → Fork repo từ GitHub</li>
+        <li><strong>Neon:</strong> Vào <a href="https://neon.tech" target="_blank">neon.tech</a> → Đăng ký → Tạo database → Copy <code>DATABASE_URL</code></li>
+        <li><strong>Cloudinary:</strong> Vào <a href="https://cloudinary.com" target="_blank">cloudinary.com</a> → Đăng ký → Lấy <code>Cloud Name</code>, <code>API Key</code>, <code>API Secret</code></li>
+        <li><strong>Google Cloud:</strong> Vào <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a> → Tạo project → APIs & Services → OAuth consent screen → Credentials → Tạo OAuth Client ID (Web application) → Thêm redirect URI → Copy Client ID + Secret</li>
+      </ol>
+      <p style="margin-top:8px;font-size:13px;color:#6b7280">Sau khi tạo xong, điền thông tin vào các ô dưới đây.</p>
+    `,
+    fields: [
+      { id: 'env.DATABASE_URL', label: 'DATABASE_URL (Neon)', ph: 'postgresql://user:pass@...neon.tech/neondb?sslmode=require' },
+      { id: 'env.GOOGLE_CLIENT_ID', label: 'Google Client ID', ph: 'xxx.apps.googleusercontent.com' },
+      { id: 'env.GOOGLE_CLIENT_SECRET', label: 'Google Client Secret', type: 'password', ph: 'GOCSPX-...' },
+      { id: 'env.AUTH_SECRET', label: 'AUTH_SECRET', ph: 'Tự sinh hoặc dùng: openssl rand -base64 32', hint: 'Có thể tự tạo bằng lệnh: openssl rand -base64 32' },
+      { id: 'env.JWT_SECRET', label: 'JWT_SECRET (Admin)', ph: 'mattong-shop-jwt-secret-2024' },
+      { id: 'env.CLOUDINARY_CLOUD_NAME', label: 'Cloudinary Cloud Name', ph: 'zgl5avbd' },
+      { id: 'env.CLOUDINARY_API_KEY', label: 'Cloudinary API Key', ph: '338483815376689' },
+      { id: 'env.CLOUDINARY_API_SECRET', label: 'Cloudinary API Secret', type: 'password', ph: '...' },
+      { id: 'env.ADMIN_EMAIL', label: 'Admin email đăng nhập', ph: 'admin@shop.com' },
+      { id: 'env.ADMIN_PASSWORD', label: 'Admin password', type: 'password', ph: '...' },
+    ]
+  },
+  {
+    id: 'domain',
+    title: 'Domain & Media',
+    desc: 'Điền domain và link ảnh (logo, favicon, banner).',
+    fields: [
+      { id: 'env.AUTH_URL', label: 'Domain (AUTH_URL)', ph: 'https://shop.vercel.app', hint: 'Có thể dùng .vercel.app tạm, sau đổi' },
+      { id: 'media.logoUrl', label: 'Logo URL (Cloudinary)', ph: 'https://res.cloudinary.com/.../logo.png' },
+      { id: 'media.faviconUrl', label: 'Favicon URL (Cloudinary)', ph: 'https://res.cloudinary.com/.../favicon.png' },
+      { id: 'media.heroBannerUrl', label: 'Hero Banner URL (Cloudinary)', ph: 'https://res.cloudinary.com/.../hero.jpg' },
+      { id: 'media.videoUrl', label: 'Video URL (Cloudinary) — nếu có', ph: '', required: false },
+      { id: 'media.videoPosterUrl', label: 'Video Poster URL — nếu có', ph: '', required: false },
+    ]
+  },
+  {
+    id: 'checklist',
+    title: 'Checklist hoàn thành',
+    desc: 'Đánh dấu những việc đã làm để đảm bảo không thiếu bước.',
+    checklist: [
+      'Đã tạo tài khoản Vercel',
+      'Đã tạo database Neon',
+      'Đã tạo Cloudinary account',
+      'Đã tạo Google OAuth Client ID',
+      'Đã thêm redirect URI vào Google Cloud Console',
+      'Đã upload logo + favicon lên Cloudinary',
+      'Đã upload hero banner + video (nếu có) lên Cloudinary',
+      'Đã fork/import repo về GitHub của mình',
+    ]
+  }
+]
+
+// === APP STATE ===
+const state = {
+  site: { name:'', tagline:'', description:'', email:'', phone:'', address:'', freeShipping:'Miễn Phí Vận Chuyển Toàn Cầu', currency:'₫' },
+  social: { facebook:'', instagram:'', youtube:'', tiktok:'', pinterest:'' },
+  bank: { bankName:'', accountNumber:'', accountHolder:'' },
+  env: { DATABASE_URL:'', GOOGLE_CLIENT_ID:'', GOOGLE_CLIENT_SECRET:'', AUTH_SECRET:'', AUTH_URL:'', CLOUDINARY_CLOUD_NAME:'', CLOUDINARY_API_KEY:'', CLOUDINARY_API_SECRET:'', ADMIN_EMAIL:'', ADMIN_PASSWORD:'', JWT_SECRET:'' },
+  media: { logoUrl:'', faviconUrl:'', heroBannerUrl:'', videoUrl:'', videoPosterUrl:'' },
+  checklist: {}
+}
+
+// === LOAD / SAVE ===
+function loadState() {
+  try {
+    const saved = localStorage.getItem('handover_state')
+    if (saved) Object.assign(state, JSON.parse(saved))
+  } catch(e) {}
+}
+function saveState() {
+  localStorage.setItem('handover_state', JSON.stringify(state))
+}
+
+// === RENDER ===
+function render() {
+  const container = document.getElementById('steps')
+  container.innerHTML = ''
+  let filled = 0, total = 0
+
+  STEPS.forEach((step, si) => {
+    const isOpen = localStorage.getItem(`step_open_${step.id}`) !== '0'
+
+    const card = document.createElement('div')
+    card.className = 'card'
+
+    // Count filled fields in this step
+    let stepFilled = 0, stepTotal = 0
+    if (step.fields) {
+      step.fields.forEach(f => {
+        stepTotal++
+        const val = getVal(f.id)
+        if (val && val.trim()) stepFilled++
+      })
+    }
+    if (step.checklist) {
+      step.checklist.forEach((_, ci) => {
+        stepTotal++
+        if (state.checklist[`${step.id}_${ci}`]) stepFilled++
+      })
+    }
+    filled += stepFilled
+    total += stepTotal
+
+    const allDone = stepTotal > 0 && stepFilled === stepTotal
+
+    // Header
+    const header = document.createElement('div')
+    header.className = 'card-header'
+    header.onclick = () => {
+      const next = cardBody.classList.contains('open')
+      localStorage.setItem(`step_open_${step.id}`, next ? '0' : '1')
+      cardBody.classList.toggle('open')
+      header.querySelector('.icon').classList.toggle('open')
+    }
+    header.innerHTML = `
+      <span class="num ${allDone ? 'done' : ''}">${si + 1}</span>
+      <h2>${step.title}</h2>
+      ${allDone ? '<span class="done-badge">✓ Xong</span>' : `<span style="font-size:12px;color:#6b7280">${stepFilled}/${stepTotal}</span>`}
+      <span class="icon ${isOpen ? 'open' : ''}">▼</span>
+    `
+    card.appendChild(header)
+
+    // Body
+    const cardBody = document.createElement('div')
+    cardBody.className = `card-body ${isOpen ? 'open' : ''}`
+
+    if (step.descHtml) {
+      const p = document.createElement('div')
+      p.innerHTML = step.desc
+      cardBody.appendChild(p)
+    } else if (step.desc) {
+      const p = document.createElement('p')
+      p.textContent = step.desc
+      cardBody.appendChild(p)
+    }
+
+    // Fields
+    if (step.fields) {
+      step.fields.forEach(f => {
+        const div = document.createElement('div')
+        div.className = 'field'
+        const label = document.createElement('label')
+        label.textContent = f.label + (f.required !== false ? ' *' : '')
+        div.appendChild(label)
+
+        let input
+        if (f.type === 'textarea') {
+          input = document.createElement('textarea')
+        } else {
+          input = document.createElement('input')
+          input.type = f.type || 'text'
+        }
+        input.placeholder = f.ph || ''
+        input.value = getVal(f.id) || ''
+        input.oninput = () => {
+          setVal(f.id, input.value)
+          saveState()
+          render()
+        }
+        div.appendChild(input)
+        if (f.hint) {
+          const hint = document.createElement('div')
+          hint.className = 'hint'
+          hint.textContent = f.hint
+          div.appendChild(hint)
+        }
+        cardBody.appendChild(div)
+      })
+    }
+
+    // Checklist
+    if (step.checklist) {
+      step.checklist.forEach((text, ci) => {
+        const key = `${step.id}_${ci}`
+        const div = document.createElement('div')
+        div.className = `check-item ${state.checklist[key] ? 'done' : ''}`
+        const cb = document.createElement('input')
+        cb.type = 'checkbox'
+        cb.checked = !!state.checklist[key]
+        cb.onchange = () => {
+          state.checklist[key] = cb.checked
+          saveState()
+          render()
+        }
+        div.appendChild(cb)
+        const label = document.createElement('label')
+        label.textContent = text
+        div.appendChild(label)
+        cardBody.appendChild(div)
+      })
+    }
+
+    card.appendChild(cardBody)
+    container.appendChild(card)
+  })
+
+  // Progress
+  const pct = total > 0 ? Math.round((filled / total) * 100) : 0
+  document.getElementById('progressFill').style.width = pct + '%'
+}
+
+function getVal(path) {
+  const parts = path.split('.')
+  let obj = state
+  for (const p of parts) {
+    if (obj[p] === undefined) return ''
+    obj = obj[p]
+  }
+  return obj
+}
+
+function setVal(path, val) {
+  const parts = path.split('.')
+  let obj = state
+  for (let i = 0; i < parts.length - 1; i++) {
+    if (!obj[parts[i]]) obj[parts[i]] = {}
+    obj = obj[parts[i]]
+  }
+  obj[parts[parts.length - 1]] = val
+}
+
+// === EXPORT JSON ===
+function exportJSON() {
+  const output = {
+    site: { ...state.site },
+    bank: { ...state.bank },
+    env: { ...state.env },
+    media: { ...state.media },
+    social: { ...state.social }
+  }
+  const blob = new Blob([JSON.stringify(output, null, 2)], { type: 'application/json' })
+  const url = URL.createObjectURL(blob)
+  const a = document.createElement('a')
+  a.href = url
+  a.download = 'credentials.json'
+  a.click()
+  URL.revokeObjectURL(url)
+}
+
+// === CLEAR ===
+function clearAll() {
+  if (!confirm('Xoá toàn bộ dữ liệu đã nhập?')) return
+  localStorage.removeItem('handover_state')
+  Object.keys(state).forEach(k => {
+    if (typeof state[k] === 'object' && !Array.isArray(state[k])) {
+      Object.keys(state[k]).forEach(sk => state[k][sk] = '')
+    }
+  })
+  state.checklist = {}
+  render()
+}
+
+// === INIT ===
+loadState()
+render()
+</script>
+</body>
+</html>

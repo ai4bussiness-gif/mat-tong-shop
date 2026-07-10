@@ -5,12 +5,42 @@ import { formatPrice } from '@/lib/utils'
 import { orderStatusMap } from '@/lib/constants'
 import type { Order } from '@/types'
 
+const STATUS_FILTERS = [
+  { key: 'all', label: 'Tất cả' },
+  { key: 'pending', label: 'Chờ XN' },
+  { key: 'confirmed', label: 'Đã XN' },
+  { key: 'shipping', label: 'Đang giao' },
+  { key: 'delivered', label: 'Đã giao' },
+  { key: 'cancelled', label: 'Đã hủy' },
+]
+
 export default function AdminOrdersPage() {
   const [orders, setOrders] = useState<Order[]>([])
+  const [filter, setFilter] = useState('all')
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(1)
+  const [total, setTotal] = useState(0)
+  const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetch('/api/orders').then(r => r.json()).then(d => setOrders(d.orders || []))
-  }, [])
+  const fetchOrders = () => {
+    setLoading(true)
+    const params = new URLSearchParams()
+    if (filter !== 'all') params.set('status', filter)
+    params.set('page', String(page))
+    params.set('limit', '20')
+
+    fetch(`/api/orders?${params}`)
+      .then(r => r.json())
+      .then(d => {
+        setOrders(d.orders || [])
+        setTotal(d.total || 0)
+        setTotalPages(d.totalPages || 1)
+        setLoading(false)
+      })
+      .catch(() => setLoading(false))
+  }
+
+  useEffect(() => { fetchOrders() }, [filter, page])
 
   const updateStatus = async (id: number, status: string) => {
     await fetch('/api/orders', {
@@ -18,7 +48,7 @@ export default function AdminOrdersPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, status }),
     })
-    setOrders(prev => prev.map(o => o.id === id ? { ...o, status } : o))
+    fetchOrders()
   }
 
   const togglePaid = async (id: number, paid: boolean) => {
@@ -27,7 +57,13 @@ export default function AdminOrdersPage() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ id, paid }),
     })
-    setOrders(prev => prev.map(o => o.id === id ? { ...o, paid } : o))
+    fetchOrders()
+  }
+
+  // Reset page khi đổi filter
+  const changeFilter = (key: string) => {
+    setFilter(key)
+    setPage(1)
   }
 
   return (
@@ -35,13 +71,35 @@ export default function AdminOrdersPage() {
       <div className="flex items-center justify-between">
         <div>
           <h1 className="text-xl font-bold text-white">Đơn hàng</h1>
-          <p className="text-sm text-gray-400 mt-1">Quản lý đơn hàng ({orders.length})</p>
+          <p className="text-sm text-gray-400 mt-1">Tổng số: {total} đơn</p>
         </div>
       </div>
 
-      {orders.length === 0 ? (
+      {/* Filter buttons */}
+      <div className="flex items-center gap-2 flex-wrap">
+        {STATUS_FILTERS.map(f => (
+          <button
+            key={f.key}
+            onClick={() => changeFilter(f.key)}
+            className={`px-3.5 py-1.5 text-xs font-medium rounded-lg transition-colors ${
+              filter === f.key
+                ? 'bg-[#b8860b] text-white'
+                : 'bg-[#1a2236] text-gray-400 hover:text-white hover:bg-[#243044] border border-gray-700'
+            }`}
+          >
+            {f.label}
+          </button>
+        ))}
+      </div>
+
+      {/* Orders */}
+      {loading ? (
         <div className="text-center py-20 text-gray-500 bg-[#0f172a] border border-gray-800 rounded-xl">
-          <p>Chưa có đơn hàng nào</p>
+          <p>Đang tải...</p>
+        </div>
+      ) : orders.length === 0 ? (
+        <div className="text-center py-20 text-gray-500 bg-[#0f172a] border border-gray-800 rounded-xl">
+          <p>Không có đơn hàng nào</p>
         </div>
       ) : (
         <div className="space-y-3">
@@ -153,6 +211,41 @@ export default function AdminOrdersPage() {
               </details>
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Pagination */}
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center gap-2 pt-4">
+          <button
+            onClick={() => setPage(p => Math.max(1, p - 1))}
+            disabled={page <= 1}
+            className="px-3.5 py-1.5 text-xs font-medium bg-[#1a2236] text-gray-400 rounded-lg border border-gray-700 hover:text-white hover:bg-[#243044] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            ← Trước
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(p => (
+            <button
+              key={p}
+              onClick={() => setPage(p)}
+              className={`w-8 h-8 text-xs font-medium rounded-lg transition-colors ${
+                page === p
+                  ? 'bg-[#b8860b] text-white'
+                  : 'bg-[#1a2236] text-gray-400 border border-gray-700 hover:text-white hover:bg-[#243044]'
+              }`}
+            >
+              {p}
+            </button>
+          ))}
+
+          <button
+            onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+            disabled={page >= totalPages}
+            className="px-3.5 py-1.5 text-xs font-medium bg-[#1a2236] text-gray-400 rounded-lg border border-gray-700 hover:text-white hover:bg-[#243044] disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+          >
+            Sau →
+          </button>
         </div>
       )}
     </div>

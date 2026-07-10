@@ -1,9 +1,26 @@
 import { NextRequest, NextResponse } from "next/server"
 import { prisma } from "@/lib/db"
 
-export async function GET() {
-  const orders = await prisma.order.findMany({ orderBy: { createdAt: "desc" }, take: 50 })
-  return NextResponse.json({ orders })
+export async function GET(request: NextRequest) {
+  const { searchParams } = new URL(request.url)
+  const status = searchParams.get('status')
+  const page = Math.max(1, parseInt(searchParams.get('page') || '1'))
+  const limit = Math.min(100, Math.max(1, parseInt(searchParams.get('limit') || '20')))
+  const skip = (page - 1) * limit
+
+  const where = status && status !== 'all' ? { status } : {}
+
+  const [orders, total] = await Promise.all([
+    prisma.order.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      skip,
+      take: limit,
+    }),
+    prisma.order.count({ where }),
+  ])
+
+  return NextResponse.json({ orders, total, page, limit, totalPages: Math.ceil(total / limit) })
 }
 
 export async function POST(req: NextRequest) {

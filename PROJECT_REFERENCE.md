@@ -169,7 +169,8 @@ mat-tong-shop/
 || 2026-07-10 | Google OAuth: thêm `emailVerified` vào User model (fix Auth.js crash) | `prisma/schema.prisma` |
 || 2026-07-10 | Login success toast + Mật Tông blessing | `LoginToast.tsx`, `AuthProvider.tsx`, `globals.css` |
 || 2026-07-10 | Header: user dropdown (avatar/logout) + cập nhật OAuth client Google | `Header.tsx`, `.env.local` |
-|
+|| 2026-07-10 | Admin orders: filter theo trạng thái + phân trang | `api/orders/route.ts`, `admin/don-hang/page.tsx` |
+||
 ## 8. Commands
 
 ```bash

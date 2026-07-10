@@ -166,6 +166,9 @@ mat-tong-shop/
 || 2026-07-09 | "Chư" inherit font-bold (đồng bộ size với tên chính) | `src/app/(public)/page.tsx` |
 || 2026-07-09 | Mobile menu: text → logo image | `Header.tsx` |
 || 2026-07-09 | Logo: gold tone + shimmer sweep + glow pulse (6 vị trí) | `globals.css`, `Header.tsx`, `Footer.tsx`, `admin/layout.tsx`, `admin/login/page.tsx` |
+|| 2026-07-10 | Google OAuth: thêm `emailVerified` vào User model (fix Auth.js crash) | `prisma/schema.prisma` |
+|| 2026-07-10 | Login success toast + Mật Tông blessing | `LoginToast.tsx`, `AuthProvider.tsx`, `globals.css` |
+|| 2026-07-10 | Header: user dropdown (avatar/logout) + cập nhật OAuth client Google | `Header.tsx`, `.env.local` |
 |
 ## 8. Commands
 

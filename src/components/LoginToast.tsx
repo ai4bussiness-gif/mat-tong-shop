@@ -25,20 +25,23 @@ export function LoginToast() {
   const { data: session, status } = useSession()
   const [show, setShow] = useState(false)
   const [message, setMessage] = useState("")
-  const prevRef = useRef<"loading" | "authenticated" | "unauthenticated">("loading")
+  const shownRef = useRef(false)
 
+  // Detect login transition
   useEffect(() => {
-    const prev = prevRef.current
-    prevRef.current = status
-
-    // Show toast only on transition: loading → authenticated
-    if (prev === "loading" && status === "authenticated" && session) {
+    if (status === "authenticated" && session && !shownRef.current) {
+      shownRef.current = true
       setMessage(`Đăng nhập thành công! ${pickBlessing()}`)
       setShow(true)
-      const timer = setTimeout(() => setShow(false), 5500)
-      return () => clearTimeout(timer)
     }
   }, [status, session])
+
+  // Auto-dismiss timer
+  useEffect(() => {
+    if (!show) return
+    const timer = setTimeout(() => setShow(false), 5500)
+    return () => clearTimeout(timer)
+  }, [show])
 
   if (!show) return null
 

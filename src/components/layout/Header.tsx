@@ -2,17 +2,20 @@
 
 import { useState, useEffect } from "react"
 import Link from "next/link"
-import { Menu, Search, User, ShoppingBag, X, ChevronDown } from "lucide-react"
+import { Menu, Search, User, ShoppingBag, X, ChevronDown, LogOut } from "lucide-react"
 import { useCartStore } from "@/lib/store"
 import { categories } from "@/lib/constants"
 import { siteConfig } from "@/lib/constants"
+import { useSession, signOut } from "next-auth/react"
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
   const [mounted, setMounted] = useState(false)
+  const [userMenuOpen, setUserMenuOpen] = useState(false)
   const itemCount = useCartStore((s) => s.getItemCount())
+  const { data: session, status } = useSession()
 
   useEffect(() => { setMounted(true) }, [])
 
@@ -105,9 +108,60 @@ export function Header() {
             >
               <Search className="w-5 h-5" />
             </button>
-            <Link href="/admin" className="p-2 text-gray-300 hover:text-white transition-colors hidden sm:block" aria-label="Login">
-              <User className="w-5 h-5" />
-            </Link>
+            {status === "authenticated" && session?.user ? (
+              <div className="relative hidden sm:block">
+                <button
+                  onClick={() => setUserMenuOpen(!userMenuOpen)}
+                  className="flex items-center gap-2 p-1.5 pr-3 text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                >
+                  {session.user.image ? (
+                    <img
+                      src={session.user.image}
+                      alt=""
+                      className="w-7 h-7 rounded-full"
+                    />
+                  ) : (
+                    <User className="w-5 h-5" />
+                  )}
+                  <span className="text-sm font-medium max-w-[100px] truncate">
+                    {session.user.name || "User"}
+                  </span>
+                </button>
+                {userMenuOpen && (
+                  <>
+                    <div className="fixed inset-0 z-40" onClick={() => setUserMenuOpen(false)} />
+                    <div className="absolute right-0 top-full mt-2 w-48 bg-[#0f172a] border border-gray-700 rounded-xl py-2 shadow-xl shadow-black/20 z-50">
+                      <Link
+                        href="/don-hang"
+                        className="block px-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        Đơn Hàng
+                      </Link>
+                      <Link
+                        href="/admin"
+                        className="block px-4 py-2.5 text-sm text-gray-400 hover:text-white hover:bg-white/5 transition-colors"
+                        onClick={() => setUserMenuOpen(false)}
+                      >
+                        Quản Trị
+                      </Link>
+                      <hr className="my-1 border-gray-800" />
+                      <button
+                        onClick={() => { setUserMenuOpen(false); signOut() }}
+                        className="flex items-center gap-2 w-full px-4 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-white/5 transition-colors"
+                      >
+                        <LogOut className="w-4 h-4" />
+                        Đăng xuất
+                      </button>
+                    </div>
+                  </>
+                )}
+              </div>
+            ) : (
+              <Link href="/don-hang" className="p-2 text-gray-300 hover:text-white transition-colors hidden sm:block" aria-label="Đăng nhập">
+                <User className="w-5 h-5" />
+              </Link>
+            )}
             <button
               onClick={toggleCart}
               className="p-2 text-gray-300 hover:text-white transition-colors relative"
